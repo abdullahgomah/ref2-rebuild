@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    {{website.name}}
+{% endblock title %}
+    
+
+
+{% block content %}
+
+<h3>
+    اسم الموقع: 
+    {{website.name}}
+</h3>
+<hr>
+
+<h4>قواعد البيانات</h4>
+
+{% for db in website.databases.all %}
+    <p>{{db}}</p>
+    <ul>
+        
+        {% for table in db.tables.all %}
+            <p>{{table}}</p>
+            
+            
+            <ul>
+                {% for field in table.fields.all %}
+                <li>{{field}}</li>
+                {% endfor %}
+            </ul>
+                
+
+        {% endfor %}
+            
+    </ul>
+{% endfor %}
+<hr>
+
+<h4>الصفحات</h4>
+    
+
+{% endblock content %}

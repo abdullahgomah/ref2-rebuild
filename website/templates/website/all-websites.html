@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    جميع المواقع
+{% endblock title %}
+    
+
+
+{% block content %}
+
+
+<h1>جميع المواقع</h1>
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>اسم الموقع</td>
+        <td>لغة البرمجة / إطار العمل</td>
+        <td>عدد قواعد البيانات</td>
+    </tr>
+{% for website in websites %}
+    <tr>
+        <td>{{website.id}}</td>
+        <td>
+            <a href="{% url 'website:website-details' website.id %}">
+                {{website.name}}
+            </a>
+        </td>
+        <td>{{website}}</td>
+        <td>{{website.databases.count}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+
+
+{% endblock content %}
