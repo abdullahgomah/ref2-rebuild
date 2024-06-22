@@ -9,4 +9,5 @@ urlpatterns = [
     path('create/', create_new_website, name='create-new-website'), 
     path('ajax-all-websites/', ajax_all_websites, name='ajax-all-websites'), 
     path('del-websites/<int:id>/', del_website, name='del-website'), 
+    path('add-page/', add_page, name='add-page'), 
 ]

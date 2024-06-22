@@ -1,3 +1,11 @@
 .website-pages-grid .col{
     min-height: 100px;
 }
+
+.add-page-form .field {
+    line-height: 2;
+}
+
+.add-page-form .input { 
+    width: 100%;
+}

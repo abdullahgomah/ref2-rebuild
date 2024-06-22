@@ -1,0 +1,18 @@
+<div class="grid website-pages-grid">
+    {% if website.pages.all %}
+        {% for page in website.pages.all %}
+
+        <div class="col page">
+            <h3>{{page.name}}</h3>
+
+            <a href="#" class="btn btn-outline btn-open-code">افتح الكود</a>
+        </div>
+
+        {% endfor %}
+    {% else %}
+        <center>
+            <h3>لا يوجد صفحات لعرضها</h3>
+        </center>
+    {% endif %}
+
+</div>

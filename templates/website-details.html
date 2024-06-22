@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-{{website.name}}
+    {{website.name}}
 {% endblock title %}
 
 
@@ -12,7 +12,7 @@
 
 
 {% block content %}
-
+    <input type="hidden" name="website-id" value="{{website.id}}">
     <section class="website-pages">
         <div class="container">
             <div class="section__heading">
@@ -23,19 +23,38 @@
                     {{website.description}}
                 </p>
             </div>
+            
             <div class="section__content">
-                <div class="grid website-pages-grid">
-                    {% for page in website.pages.all %}
-
-                    <div class="col page">
-                        <h3>{{page.name}}</h3>
-
-                        <a href="#" class="btn btn-outline btn-open-code">افتح الكود</a>
+                <h4>إضافة صفحة جديدة</h4>
+                <form class="add-page-form">
+                    {% csrf_token %}
+                    <div class="field">
+                        <p>اسم الصفحة</p>
+                        <input type="text" name="page-name-input" placeholder="اكتب اسم الصفحة" class="input text-input">
                     </div>
+                    <a  class="btn btn-solid-dark btn-add-page">إنشاء صفحة</a>
+                </form>
+            </div>
 
-                    {% endfor %}
+            <br>
 
-                    
+            <div class="section__content all-pages-grid">
+                <div class="grid website-pages-grid">
+                    {% if website.pages.all %}
+                        {% for page in website.pages.all %}
+
+                        <div class="col page">
+                            <h3>{{page.name}}</h3>
+
+                            <a href="#" class="btn btn-outline btn-open-code">افتح الكود</a>
+                        </div>
+
+                        {% endfor %}
+                    {% else %}
+                        <center>
+                            <h3>لا يوجد صفحات لعرضها</h3>
+                        </center>
+                    {% endif %}
 
                 </div>
             </div>
@@ -73,5 +92,8 @@
             <a href="{% url 'website:del-website' website.id %}" class="btn btn-solid-danger">حذف الموقع</a>
         </div>
     </section>
+
+
+    <script src="{% static 'js/add-page.js' %}"></script>
 
     {% endblock content %}
