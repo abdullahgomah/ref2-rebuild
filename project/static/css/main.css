@@ -1,0 +1,294 @@
+* { 
+    padding: 0;
+    margin:0; 
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+}
+
+a { 
+    color: #000; 
+    text-decoration: none;
+}
+
+
+.container {
+    margin: 0 auto; 
+}
+
+body {
+    overflow-x: hidden;
+    background-color: #fef0e5;
+    margin-bottom: 1rem;
+}
+
+
+/* header style */
+
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    padding: 1rem;
+    height: 80px;
+
+}
+
+header .logo-container, header .profile-btns {
+    flex: 1;
+}
+
+header nav {flex: 2}
+
+
+header .logo-container .logo-text { 
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    column-gap: 1rem;
+}
+
+header nav ul .list-item {
+    text-decoration: none;
+}
+
+header .profile-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 1rem; 
+}
+
+header .profile-btns img{ 
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border:1px solid #00000040;
+}
+
+header .profile-btns a { 
+    text-decoration: none;
+}
+
+.burger-menu {
+    display: none;
+}
+
+
+
+
+
+
+/* section */
+section .section__heading { 
+    line-height: 1.6;
+    margin-bottom: 1rem
+}
+
+section .section__heading .section__heading__text {
+    color: #121212;
+}
+
+
+
+/* grid style */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem; 
+}
+.grid .col 
+{
+    min-height: 200px;
+    border-radius: 1rem;
+    border: 1px solid #12121250;
+    padding: 1rem;
+}
+
+
+
+/* btn */
+
+.btn {
+    display: block;
+    width: fit-content; 
+    padding: .5rem 1rem; 
+    border-radius: 2rem;
+    margin-top: 1rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-outline { 
+    border: 1px solid #121212;
+}
+
+.btn-solid-danger {
+    background: #dc3545; 
+    color: #ffffff;
+}
+
+.btn-solid-dark {
+    background: #121212;
+    color: #fef0e5;
+}
+
+.text-input { 
+    padding: .5rem 1rem; 
+    border-radius: 15px;
+    outline: none; 
+    border: 1px solid #12121230;
+}
+
+input { 
+    display: block;
+}
+
+.btn-sm {
+    transform: scale(0.8);
+}
+
+
+
+/* textarea */
+
+textarea {
+    resize: none;
+    height: 100px;
+    border-radius: 15px;
+    padding: .5rem 1rem; 
+    border: 1px solid #12121230;
+}
+
+
+/* select */
+
+select {
+    padding: .5rem 1rem ;
+    border-radius: 15px;
+    border: 1px solid #12121230;
+    outline: none;
+}
+
+
+input.error, textarea.error, select.error {
+    border-color: #dc354560 !important; 
+    color: #dc3545; 
+}
+
+
+
+/* messages */
+
+.messages {
+    margin-bottom: .5rem;
+}
+
+.messages li {
+    list-style: none;
+    padding: 10px;
+}
+
+.messages li.info {
+    background: #2196F3;
+    color: #f9f9f9f9;
+}
+
+.messages li.error { 
+    background: #dc3545; 
+    color: #f9f9f9;
+}
+
+.messages li.success { 
+    background: #20c997; 
+    color: #121212;
+}
+
+/* responsive dim */
+
+
+@media (max-width: 575.98px) { 
+    .container {
+        width: 90%; 
+        max-width: 90%;
+    }
+
+    header .profile-btns .user__name { display: none;}
+}
+
+@media screen and (max-width: 767px) { 
+
+    header {
+        position: relative;
+    }
+
+    header nav {
+        position: absolute;
+        left: -100%; 
+        top: 80px; 
+        width: 100%; 
+        transition: all .2s ease-in-out;
+        background: #fef0e5;
+        border-bottom: 1px solid #12121250;
+    }
+
+
+    header nav.show {
+        left: 0; 
+    }
+
+    header nav ul {
+        flex-direction: column;
+        row-gap: 1.5rem; 
+        /* background: red;  */
+        padding: 1rem ;
+        align-items: flex-start;
+    }
+
+    header nav ul li {
+        text-align: right;
+    }
+
+    header .profile-btns {
+        position: absolute;
+    }
+
+
+    .burger-menu {
+        display: block;
+    }
+
+}
+
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    .container {
+        width: 576px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .container {
+        width: 768px; 
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .container {
+        width: 992px; 
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1100px;
+    }
+} 

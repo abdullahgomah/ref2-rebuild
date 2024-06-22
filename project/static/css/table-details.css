@@ -1,0 +1,38 @@
+.fields__types {
+    line-height: 2;
+    width: 300px;
+    max-width: 100%;
+    margin-top: 1rem;
+}
+
+.field_type {
+    display: flex;
+    justify-content: space-between;
+}
+
+.section__content.add-field .text-input {
+    width:300px ; 
+    max-width: 100%;
+}
+
+.table_fields_table { 
+    overflow-x: auto;
+}
+
+.table_fields_table table  {
+    width: 100%;
+    border-spacing: 0; 
+}
+
+.table_fields_table table thead { 
+    background: #121212; 
+    color: #fef0e5;
+}
+
+.table_fields_table table td { 
+    padding: 15px;
+}
+
+.db_field_actions { 
+    display: flex;
+}

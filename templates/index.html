@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+الرئيسية
+{% endblock title %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/add-website-form.css' %}">
+{% endblock stylesheets %}
+
+
+
+{% block content %}
+
+
+    <section class="all-websites">
+        <div class="container">
+            <div class="section__heading">
+                <h1 class="section__heading__title">جميع المواقع</h1>
+                <p class="section__heading__text">
+                    لإضافة موقع املأ النموذج
+                </p>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="add-website-form">
+
+                            <div class="field">
+                                <p>اسم الموقع</p> 
+                                <input name="website-name-input" type="text" placeholder="اكتب اسم الموقع" class="input text-input">
+                            </div>
+
+                            <div class="field">
+                                <p>التقنية / الأداة</p>
+                                <select class="" name="website-tool-input" id="website-tool-input">
+                                    {% for tool in tools %}
+                                        <option value="{{tool.id}}">{{tool.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+
+                            <div class="field">
+                                <p>وصف الموقع</p>
+                                <textarea name="website-description-input" id="" placeholder="اكتب وصف الموقع" class="" ></textarea>
+                            </div>
+
+                    </div>
+                </form>
+                <a id="btn-add-website" class="btn btn-solid-dark">إنشاء موقع جديد</a>
+            </div>
+            <div class="section__content" id="section__all_websites">
+                {% comment %} <div class="grid all-websites-grid">
+                    {% for website in websites %}
+                    <div class="col website">
+                        <h3>{{website.name}}</h3>
+                        <p>
+                            {{website.description}}
+                        </p>
+                        <p>
+                            عدد قواعد البيانات: 
+                            {{website.databases.count}}
+                        </p>
+                        <a href="{% url 'website:website-details' website.id %}" class="btn btn-outline btn-open-website">تفاصيل الموقع</a>
+                    </div>
+                    {% endfor %}
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <section id="ai-section">
+        <div class="container">
+            <div class="section__heading">
+                <h1 class="section__heading__title">
+                    مساعدك الشخصي
+                </h1>
+                <p>
+                    مساعد شخصي مربوط بالذكاء الاصطناعي جاهز للإجابة على أسئلتك
+                </p>
+            </div>
+            <div class="section__content">
+                <div class="question__box">
+                    <input type="text" placeholder="اكتب سؤالك... " class="text-input input">
+                    {% comment %} <a href="" class="btn btn-solid-dark btn-sm">اسأل</a> {% endcomment %}
+                    <button class="btn btn-solid-dark">اسأل</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{% static 'js/index.js' %}"></script>
+
+
+{% endblock content %}
+
+    

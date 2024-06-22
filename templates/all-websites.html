@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+جميع المواقع
+{% endblock title %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/add-website-form.css' %}">
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+<section class="all-websites">
+    <div class="container">
+        <div class="section__heading">
+            <h1 class="section__heading__title">جميع المواقع</h1>
+            <p class="section__heading__text">جميع المواقع التي انشأتها</p>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="add-website-form">
+
+                        <div class="field">
+                            <p>اسم الموقع</p> 
+                            <input name="website-name-input" type="text" placeholder="اكتب اسم الموقع" class="input text-input">
+                        </div>
+
+                        <div class="field">
+                            <p>التقنية / الأداة</p>
+                            <select class="" name="website-tool-input" id="website-tool-input">
+                                {% for tool in tools %}
+                                    <option value="{{tool.id}}">{{tool.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                        <div class="field">
+                            <p>وصف الموقع</p>
+                            <textarea name="website-description-input" id="" placeholder="اكتب وصف الموقع" class="" ></textarea>
+                        </div>
+
+                </div>
+            </form>
+            <a id="btn-add-website" class="btn btn-solid-dark">إنشاء موقع جديد</a>
+        </div>
+        <div class="section__content" id="section__all_websites">
+            <!--  -->
+            <div class="grid all-websites-grid">
+                {% for website in websites %}
+                <div class="col website">
+                    <h3>{{website.name}}</h3>
+                    <p>
+                        {{website.description}}
+                    </p>
+                    <a href="#" class="btn btn-outline btn-open-website">تفاصيل الموقع</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="{% static 'js/add-website.js' %}"></script>
+
+{% endblock content %}

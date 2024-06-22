@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{website.name}}
+{% endblock title %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/website-details.css' %}">
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+    <section class="website-pages">
+        <div class="container">
+            <div class="section__heading">
+                <h1 class="section__heading__title">
+                    {{website.name}}
+                </h1>
+                <p class="section__heading__text">
+                    {{website.description}}
+                </p>
+            </div>
+            <div class="section__content">
+                <div class="grid website-pages-grid">
+                    {% for page in website.pages.all %}
+
+                    <div class="col page">
+                        <h3>{{page.name}}</h3>
+
+                        <a href="#" class="btn btn-outline btn-open-code">افتح الكود</a>
+                    </div>
+
+                    {% endfor %}
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br>
+
+    <section>
+        <div class="container">
+            <div class="section__heading">
+                <h1 class="section__heading__title">قواعد البيانات</h1>
+                <p class="section__heading__text">كافة قواعد البيانات المربوطة بالمشروع</p>
+            </div>
+
+            <div class="section__content">
+                <div class="grid website-databases">
+                    {% for db in website.databases.all %}
+                    <div class="col database">
+                        <h3>
+                            {{db.name}}
+                        </h3>
+
+                        <a href="#" class="btn btn-outline btn-open-code">التفاصيل</a>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <a href="{% url 'website:del-website' website.id %}" class="btn btn-solid-danger">حذف الموقع</a>
+        </div>
+    </section>
+
+    {% endblock content %}

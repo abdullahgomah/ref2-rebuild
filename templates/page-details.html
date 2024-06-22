@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بالإشارة | الرئيسية</title>
+   
+    <!-- start highlights js  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/androidstudio.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- end highlights js -->
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/page-details.css">
+</head>
+<body>
+    
+
+    <header>
+        <!-- <div class="container"> -->
+            <div class="logo-container">
+                <p class="logo-text">
+                    <a href="">
+                        بالإشارة إلى
+                    </a>
+                </p>
+            </div>
+            <nav >
+                <ul>
+                    <li><a href="#" class="list-item">الرئيسية</a></li>
+                    <li><a href="#" class="list-item">قواعد البيانات</a></li>
+                    <li><a href="#" class="list-item">المواقع</a></li>
+                    <li><a href="#" class="list-item">القوالب الجاهزة</a></li>
+                </ul>
+            </nav>
+            <div class="profile-btns">
+                <a href="">
+                    <img src="./images/user-solid(1).svg" alt="">
+                </a>
+                <a href="#" class="user__name">عبدالله محمد</a>
+            </div>
+
+            <div class="burger-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        <!-- </div> -->
+    </header>
+
+
+    <section class="page-code">
+        <div class="container">
+            <div class="section__header">
+                <h1 class="section__heading__title">الرئيسية</h1>
+                <a href="#" class="btn btn-outline">معاينة</a>
+            </div>
+            <br>
+            <div class="section__content">
+                <!-- here is code editor -->
+
+                <div class="code-div">
+                    <p>
+                        <i class="fa-brands fa-html5"></i>
+                        HTML
+                    </p>
+                    <textarea name="html-code" id="html-code" onkeyup="run()"></textarea>
+                </div>
+
+                <div class="code-div">
+                    <p>
+                        <i class="fa-brands fa-css3-alt"></i>
+                        CSS
+                    </p>
+                    <textarea onkeyup="run()" name="css-code" id="css-code"></textarea>
+                </div>
+
+                <div class="code-div">
+                    <p>
+                        <i class="fa-brands fa-js"></i>
+                        JS
+                    </p>
+                    <textarea name="js-code" id="js-code" onkeyup="run()"></textarea>
+                </div>
+
+                <iframe id="output-iframe" name="output-iframe" ></iframe>
+
+                <div class="page-actions">
+                    <a href="#" class="btn btn-outline">حفظ</a>
+                    <a href="#" class="btn btn-solid-danger">حذف الصفحة</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <script>
+        hljs.highlightAll();
+
+        let htmlCode = document.querySelector('#html-code'); 
+        let cssCode = document.querySelector('#css-code'); 
+        let jsCode = document.querySelector('#js-code'); 
+        let outputIframe = document.querySelector('#output-iframe'); 
+
+        function run () { 
+            outputIframe.contentDocument.body.innerHTML  = htmlCode.value + "<style>" + cssCode.value + "</style>"
+            outputIframe.contentWindow.eval(jsCode.value); 
+        }
+
+
+        let textareas = document.querySelectorAll('textarea').forEach((text) => {
+            text.addEventListener('keydown', function(e) {
+                if (e.key == 'Tab') {
+                  e.preventDefault();
+                  var start = this.selectionStart;
+                  var end = this.selectionEnd;
+              
+                  // set textarea value to: text before caret + tab + text after caret
+                  this.value = this.value.substring(0, start) +
+                    "\t" + this.value.substring(end);
+              
+                  // put caret at right position again
+                  this.selectionStart =
+                    this.selectionEnd = start + 1;
+                }
+              });
+        })
+
+    </script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

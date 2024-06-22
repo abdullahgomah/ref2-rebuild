@@ -17,6 +17,7 @@ class Website(models.Model):
     
 
 class WebsitePage(models.Model):
+    website = models.ForeignKey(Website, on_delete=models.CASCADE, verbose_name="الموقع", related_name='pages')
     name = models.CharField(max_length=250, verbose_name="اسم الصفحة")
     html = models.TextField(verbose_name="html") 
     css = models.TextField(verbose_name="css") 

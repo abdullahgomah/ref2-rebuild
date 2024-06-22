@@ -1,0 +1,42 @@
+section.page-code .section__header { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.code-div {
+    margin-bottom: 1rem;
+    direction: ltr;
+}
+
+.code-div > p { 
+    background: #282b2e;
+    color: #f9f9f9;
+    padding: .5rem 1rem;
+}
+
+.code-div textarea {
+    overflow-y: scroll;
+    width: 100%; 
+    resize: vertical;
+    min-height: 300px;
+    border: 0; 
+    outline: 0; 
+    padding: .4rem;
+    tab-size: 4;
+}
+
+#output-iframe {
+    border: 1px solid #282b2e; 
+    outline: 0; 
+    width: 100%;
+    height: auto;
+}
+
+
+.page-actions {
+    display: flex;
+    column-gap: 1rem; 
+    flex-wrap: wrap;
+}

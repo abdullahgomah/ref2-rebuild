@@ -1,0 +1,15 @@
+<div class="grid all-websites-grid">
+    {% for website in websites %}
+    <div class="col website">
+        <h3>{{website.name}}</h3>
+        <p>
+            {{website.description}}
+        </p>
+        <p>
+            عدد قواعد البيانات: 
+            {{website.databases.count}}
+        </p>
+        <a href="{% url 'website:website-details' website.id %}" class="btn btn-outline btn-open-website">تفاصيل الموقع</a>
+    </div>
+    {% endfor %}
+</div>

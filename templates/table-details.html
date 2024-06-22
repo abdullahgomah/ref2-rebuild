@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بالإشارة | الرئيسية</title>
+   
+    <!-- start highlights js  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/androidstudio.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- end highlights js -->
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/table-details.css">
+</head>
+<body>
+    
+
+    <header>
+        <!-- <div class="container"> -->
+            <div class="logo-container">
+                <p class="logo-text">
+                    <a href="">
+                        بالإشارة إلى
+                    </a>
+                </p>
+            </div>
+            <nav >
+                <ul>
+                    <li><a href="#" class="list-item">الرئيسية</a></li>
+                    <li><a href="#" class="list-item">قواعد البيانات</a></li>
+                    <li><a href="#" class="list-item">المواقع</a></li>
+                    <li><a href="#" class="list-item">القوالب الجاهزة</a></li>
+                </ul>
+            </nav>
+            <div class="profile-btns">
+                <a href="">
+                    <img src="./images/user-solid(1).svg" alt="">
+                </a>
+                <a href="#" class="user__name">عبدالله محمد</a>
+            </div>
+
+            <div class="burger-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        <!-- </div> -->
+    </header>
+
+
+    <section>
+
+            <div class="container">
+                <div class="section__heading">
+
+                    <h1 class="section__heading__title">
+                        <a href="#">اسم الجدول</a>
+                        / 
+                        المدراء
+                    </h1>
+                </div>
+                <div class="section__content add-field">
+                    <h3>إضافة حقل</h3>
+                    <div class="fields__types">
+                        <div class="field_type">
+                            <label class="field_type__label" >نص</label>
+                            <input type="radio" name="field__type" >
+                        </div>
+
+                        <div class="field_type">
+                            <label class="field_type__label">صورة</label>
+                            <input type="radio" name="field__type" >
+                        </div>
+
+                        <div class="field_type">
+                            <label class="field_type__label">رقم</label>
+                            <input type="radio" name="field__type" >
+                        </div>
+
+                        <div class="field_type">
+                            <label class="field_type__label">ملف</label>
+                            <input type="radio" name="field__type" >
+                        </div>
+
+                        <div class="field_type">
+                            <label class="field_type__label">رابط</label>
+                            <input type="radio" name="field__type" >
+                        </div>
+                    </div>
+                    <br>
+                    <input type="text" placeholder="اكتب اسم الحقل" class="text-input input" id="field__name">
+                    <br>
+                    <input type="text" placeholder="وصف الحقل" class="input text-input" id="field__description">
+                    <button class="btn btn-solid-dark">إضافة حقل</button>
+                </div>
+                <br>
+                <div class="section__content table_fields_table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>اسم الحقل</td>
+                                <td>وصف الحقل</td>
+                                <td>نوع الحقل</td>
+                                <td>الاجراءات</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>اسم المستخدم</td>
+                                <td>حقل اسم المستخدم</td>
+                                <td>نص</td>
+                                <td class="db_field_actions">
+                                    <a href="#" class="btn btn-sm btn-solid-dark">تفاصيل</a>
+                                    <a href="#" class="btn btn-sm btn-solid-danger">حذف</a>
+                                    <a href="#" class="btn btn-sm btn-outline">نسخ الكود</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
+
+
+
+    </section>
+
+
+    <script>
+
+        let fieldsTypes = document.querySelector('.fields__types' ) 
+        let fieldsTypesInputs = document.querySelector('.fields__types' ).querySelectorAll('input') 
+        fieldsTypesInputs.forEach((input) => {
+            input.parentElement.querySelector('label').addEventListener('click', () => {
+                fieldsTypesInputs.forEach((radio_input) => {
+                    radio_input.checked = false; 
+                })
+
+                // complete the code here 
+                input.checked = true;
+            }) 
+
+        })
+
+    </script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
