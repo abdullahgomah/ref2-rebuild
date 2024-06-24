@@ -68,6 +68,25 @@
             <div class="section__heading">
                 <h1 class="section__heading__title">قواعد البيانات</h1>
                 <p class="section__heading__text">كافة قواعد البيانات المربوطة بالمشروع</p>
+                <div class="add-database-form">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="field">
+                            <p>اسم قاعدة البيانات</p>
+                            <input type="text" class="text-input input" placeholder="اكتب اسم قاعدة البيانات" name="db-name-input">
+                        </div>
+                        <div class="field">
+                            <p>نوع قاعدة البيانات</p>
+                            <select name="db-type-input" id="db-type-input">
+
+                                {% for type in db_types %}
+                                    <option value="{{type.id}}">{{type.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <a class="btn btn-solid-dark btn-add-db">إضافة قاعدة بيانات جديدة</a>
             </div>
 
             <div class="section__content">
@@ -95,5 +114,6 @@
 
 
     <script src="{% static 'js/add-page.js' %}"></script>
+    <script src="{% static 'js/add-database.js' %}"></script>
 
     {% endblock content %}

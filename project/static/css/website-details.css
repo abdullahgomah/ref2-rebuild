@@ -9,3 +9,21 @@
 .add-page-form .input { 
     width: 100%;
 }
+
+.add-database-form form{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.add-database-form  .field { 
+    line-height: 2;
+    flex: 1;
+}
+
+.add-database-form .input, .add-database-form select {
+    width: 100%;
+    max-width: 100%;
+}

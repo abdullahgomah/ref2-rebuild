@@ -1,0 +1,9 @@
+{% for db in website.databases.all %}
+<div class="col database">
+    <h3>
+        {{db.name}}
+    </h3>
+
+    <a href="#" class="btn btn-outline btn-open-code">التفاصيل</a>
+</div>
+{% endfor %}
