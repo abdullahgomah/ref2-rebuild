@@ -6,7 +6,7 @@ class Website(models.Model):
     name = models.CharField(max_length=255, verbose_name="اسم الموقع")
     description = models.TextField(verbose_name="الوصف", blank=True, null=True)
     tool = models.ForeignKey(Tool, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="اللغة / إطار العمل")
-
+    date_created = models.DateTimeField(null=True, blank=True, verbose_name="تاريخ الإنشاء", auto_now_add=True) 
 
     def __str__(self):
         return self.name 
