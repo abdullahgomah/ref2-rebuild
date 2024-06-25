@@ -32,6 +32,7 @@ btnAddTable.addEventListener("click", () => {
                 "csrfmiddlewaretoken": document.querySelector('[name=csrfmiddlewaretoken]').value, 
             }, success: function(response) { 
                 $(".db-tables").html(response)
+                tableNameInput.value = ""; 
             }, error: function (xhr, status, error) { 
     
             }

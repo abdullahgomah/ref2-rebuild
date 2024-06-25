@@ -6,7 +6,7 @@ from base.models import *
 # Create your views here.
 def index(request): 
 
-    websites = Website.objects.all() 
+    websites = Website.objects.all()[::-1]
     tools = Tool.objects.all() 
 
     

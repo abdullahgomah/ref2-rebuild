@@ -29,7 +29,7 @@ def website_details(request, id):
 
 
 def ajax_all_websites(request): 
-    websites = Website.objects.all() 
+    websites = Website.objects.all()[::-1]
 
     context = {
         'websites': websites

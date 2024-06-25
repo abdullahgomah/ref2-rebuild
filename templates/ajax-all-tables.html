@@ -10,7 +10,7 @@
     </td>
     <td>{{table.fields.count}}</td>
     <td class="db__table__actions">
-        <a href="" class="btn btn-outline">تفاصيل</a>
+        <a href="{% url 'website:table-details' table.id %}" class="btn btn-outline">تفاصيل</a>
         <a href="" class="btn btn-solid-danger">حذف</a>
     </td>
 </tr>
