@@ -14,4 +14,5 @@ urlpatterns = [
     path('db-details/<int:db_id>/', db_details, name='db-details'), 
     path('add-table/', add_table, name='add-table'), 
     path('del-table/<int:id>/', del_table, name='del-table'), 
+    path('table-details/<int:table_id>/', table_details, name='table-details'), 
 ]

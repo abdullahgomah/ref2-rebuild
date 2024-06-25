@@ -165,3 +165,14 @@ def del_table(request, id):
     table.delete() 
 
     return ajax_all_tables(request, db_id)
+
+
+
+def table_details(request, table_id): 
+    table = DbTable.objects.get(id=table_id) 
+
+    context = {
+        'table': table, 
+    }
+
+    return render(request, 'table-details.html', context)
