@@ -96,8 +96,14 @@
                         <h3>
                             {{db.name}}
                         </h3>
-
-                        <a href="#" class="btn btn-outline btn-open-code">التفاصيل</a>
+                        <br>
+                        <p>
+                            عدد الجداول: 
+                            <span>
+                                {{db.tables.count}}
+                            </span>
+                        </p>
+                        <a href="{% url 'website:db-details' db.id %}" class="btn btn-outline btn-open-code">التفاصيل</a>
                     </div>
                     {% endfor %}
 

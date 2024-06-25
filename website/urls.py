@@ -11,4 +11,7 @@ urlpatterns = [
     path('del-websites/<int:id>/', del_website, name='del-website'), 
     path('add-page/', add_page, name='add-page'), 
     path('add-database/', add_database, name='add-database'), 
+    path('db-details/<int:db_id>/', db_details, name='db-details'), 
+    path('add-table/', add_table, name='add-table'), 
+    path('del-table/<int:id>/', del_table, name='del-table'), 
 ]

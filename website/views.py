@@ -118,3 +118,50 @@ def add_database(request):
         Database.objects.create(website=website_obj, name=dbName, db_type=db_type_obj)
 
         return ajax_all_db(request, website_id=website_id)
+    
+
+
+def db_details(request, db_id): 
+    db = get_object_or_404(Database, id=db_id) 
+
+    context = { 
+        'db': db 
+    }
+
+    return render(request, 'database-details.html', context)
+
+def ajax_all_tables(request, db_id): 
+    db_obj = get_object_or_404(Database, id=db_id) 
+
+    context = {
+        'db': db_obj   
+    }
+    return render(request, 'ajax-all-tables.html', context)
+    
+
+def add_table(request): 
+    if request.POST: 
+        db_id = request.POST.get('db_id') 
+        table_name = request.POST.get('table_name') 
+
+        print('='* 30)
+        print(db_id) 
+        print(table_name) 
+        print('='* 30)
+
+
+        db_obj = get_object_or_404(Database, id=db_id) 
+        
+        DbTable.objects.create(db=db_obj, name=table_name)
+
+        return ajax_all_tables(request, db_id) 
+    
+
+def del_table(request, id): 
+    table = get_object_or_404(DbTable, id=id) 
+    print(table)  
+    db_id = table.db.id 
+
+    table.delete() 
+
+    return ajax_all_tables(request, db_id)

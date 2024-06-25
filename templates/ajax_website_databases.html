@@ -4,6 +4,8 @@
         {{db.name}}
     </h3>
 
-    <a href="#" class="btn btn-outline btn-open-code">التفاصيل</a>
+    
+    <a href="{% url 'website:db-details' db.id %}" class="btn btn-outline btn-open-code">التفاصيل</a>
+
 </div>
 {% endfor %}
