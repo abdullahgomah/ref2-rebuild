@@ -28,6 +28,7 @@ btnAddDb.addEventListener('click', () => {
             }, 
             success: function (response) {
                 $(".website-databases").html(response)
+                dbNameInput.value = ""; 
             }, 
             error: function (xhr, status, error) { 
 

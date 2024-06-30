@@ -33,6 +33,8 @@ btnAddWebsite.addEventListener('click', () => {
             },
             success: function(response) {
                 $('#section__all_websites').html(response);
+                websiteNameInput.value = ""; 
+                websiteDescriptionInput.value = ""; 
             },
             error: function(xhr, status, error) {
             }
