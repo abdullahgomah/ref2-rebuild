@@ -58,7 +58,7 @@ class DbTable(models.Model):
 class TableField(models.Model):
     db_table = models.ForeignKey(DbTable, related_name='fields', on_delete=models.CASCADE, verbose_name="الجدول")
     name = models.CharField(max_length=200, verbose_name="اسم الحقل")
-    data_type = models.ForeignKey("FieldTypes",on_delete=models.SET_NULL, blank=True, null=True)
+    data_type = models.ForeignKey(DbFieldType,on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.name 
@@ -68,14 +68,14 @@ class TableField(models.Model):
         verbose_name_plural = 'حقول الجداول'
 
 
-class FieldTypes(models.Model):
-    db_type = models.ForeignKey(DBType, verbose_name="نوع قاعدة البيانات", on_delete=models.CASCADE)
-    name = models.CharField(max_length=250, verbose_name="اسم نوع حقل البيانات")
-    code = models.TextField(verbose_name="الكود الأساسي") 
+# class FieldTypes(models.Model):
+#     db_type = models.ForeignKey(DBType, verbose_name="نوع قاعدة البيانات", on_delete=models.CASCADE)
+#     name = models.CharField(max_length=250, verbose_name="اسم نوع حقل البيانات")
+#     code = models.TextField(verbose_name="الكود الأساسي") 
 
-    def __str__(self):
-        return self.name 
+#     def __str__(self):
+#         return self.name 
 
-    class Meta:
-        verbose_name = 'نوع حقل بيانات'
-        verbose_name_plural = 'أنواع حقول البيانات'
+#     class Meta:
+#         verbose_name = 'نوع حقل بيانات'
+#         verbose_name_plural = 'أنواع حقول البيانات'

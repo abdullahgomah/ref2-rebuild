@@ -17,9 +17,6 @@
 {% block content %}
     
     
-
-
-
     <section>
 
             <div class="container">
@@ -34,30 +31,16 @@
                 <div class="section__content add-field">
                     <h3>إضافة حقل</h3>
                     <div class="fields__types">
-                        <div class="field_type">
-                            <label class="field_type__label" >نص</label>
-                            <input type="radio" name="field__type" >
-                        </div>
 
-                        <div class="field_type">
-                            <label class="field_type__label">صورة</label>
-                            <input type="radio" name="field__type" >
-                        </div>
+                        {% for field_type in fields_types %}
+                        
+                            <div class="field_type">
+                                <label class="field_type__label">{{field_type.display_name}}</label>
+                                <input type="radio" name="field__type" data-table="{{field_type.db_type.id}}">
+                            </div>
 
-                        <div class="field_type">
-                            <label class="field_type__label">رقم</label>
-                            <input type="radio" name="field__type" >
-                        </div>
+                        {% endfor %}
 
-                        <div class="field_type">
-                            <label class="field_type__label">ملف</label>
-                            <input type="radio" name="field__type" >
-                        </div>
-
-                        <div class="field_type">
-                            <label class="field_type__label">رابط</label>
-                            <input type="radio" name="field__type" >
-                        </div>
                     </div>
                     <br>
                     <input type="text" placeholder="اكتب اسم الحقل" class="text-input input" id="field__name">

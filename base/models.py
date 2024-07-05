@@ -24,3 +24,14 @@ class DBType(models.Model):
     class Meta:
         verbose_name = 'نوع قاعدة بيانات'
         verbose_name_plural = 'أنواع قواعد البيانات'
+
+class DbFieldType(models.Model):
+
+    db_type = models.ForeignKey(DBType, on_delete=models.CASCADE, related_name='fields_types')
+    name = models.CharField(max_length=250, verbose_name="اسم نوع البيانات")
+    display_name = models.CharField(verbose_name="الاسم الظاهر", max_length=200)
+    cmd = models.TextField() 
+    
+
+    def __str__(self):
+        return self.name

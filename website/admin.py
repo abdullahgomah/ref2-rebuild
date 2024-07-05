@@ -8,4 +8,4 @@ admin.site.register(Database)
 
 admin.site.register(DbTable)
 admin.site.register(TableField)
-admin.site.register(FieldTypes)
+

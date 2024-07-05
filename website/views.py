@@ -170,9 +170,15 @@ def del_table(request, id):
 
 def table_details(request, table_id): 
     table = DbTable.objects.get(id=table_id) 
+    fields_types = table.db.db_type.fields_types.all() 
+
+    print(fields_types) 
+
+    ## get all datatypes for this table 
 
     context = {
         'table': table, 
+        'fields_types': fields_types, 
     }
 
     return render(request, 'table-details.html', context)
