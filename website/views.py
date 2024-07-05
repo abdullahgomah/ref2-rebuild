@@ -182,3 +182,34 @@ def table_details(request, table_id):
     }
 
     return render(request, 'table-details.html', context)
+
+
+
+def ajax_all_fields(request, table_id):  
+    table_obj = get_object_or_404(DbTable, id=int(table_id)) 
+
+    context = {
+        'table': table_obj, 
+    }
+
+    return render(request, 'ajax-all-fields.html', context) 
+
+def add_field(request): 
+    if request.POST: 
+        table_id = request.POST.get('table-id') 
+        field_type_id = request.POST.get('field-type-id') 
+        field_name = request.POST.get("field-name") 
+        field_description = request.POST.get('field-description') 
+
+        
+        table_obj = get_object_or_404(DbTable, id=int(table_id)) 
+        field_type_obj = get_object_or_404(DbFieldType, id=int(field_type_id)) 
+
+        TableField.objects.create(
+            db_table=table_obj, 
+            name=field_name, 
+            data_type=field_type_obj, 
+            description=field_description
+        )
+
+        return ajax_all_fields(request, table_id)

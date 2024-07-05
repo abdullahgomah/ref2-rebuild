@@ -1,0 +1,13 @@
+{% for field in table.fields.all %}
+<tr>
+    {% comment %} <td>1</td> {% endcomment %}
+    <td>{{field.name}}</td>
+    <td>{{field.description}}</td>
+    <td>{{field.data_type.display_name}}</td>
+    <td class="db_field_actions">
+        <a href="#" class="btn btn-sm btn-solid-dark">تفاصيل</a>
+        <a href="#" class="btn btn-sm btn-solid-danger">حذف</a>
+        <a href="#" class="btn btn-sm btn-outline">نسخ الكود</a>
+    </td>
+</tr>
+{% endfor %}

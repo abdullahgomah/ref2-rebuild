@@ -59,6 +59,7 @@ class TableField(models.Model):
     db_table = models.ForeignKey(DbTable, related_name='fields', on_delete=models.CASCADE, verbose_name="الجدول")
     name = models.CharField(max_length=200, verbose_name="اسم الحقل")
     data_type = models.ForeignKey(DbFieldType,on_delete=models.SET_NULL, blank=True, null=True)
+    description = models.TextField(verbose_name="وضصف الحقل", blank=True, null=True)
 
     def __str__(self):
         return self.name 
