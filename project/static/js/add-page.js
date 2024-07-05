@@ -25,6 +25,7 @@ btnAddPage.addEventListener('click', ()=> {
             }, 
             success: function (response) {
                 $(".all-pages-grid").html(response)
+                pageNameInput.value =""; 
             }, 
             error: function (xhr, status, error) { 
 
