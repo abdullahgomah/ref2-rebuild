@@ -44,7 +44,7 @@
         <div class="container">
             <div class="section__header">
                 <h1 class="section__heading__title">الرئيسية</h1>
-                <a href="#" class="btn btn-outline">معاينة</a>
+                <a href="{% url 'website:page-preview' page.id %}" class="btn btn-outline">معاينة</a>
             </div>
             <br>
             <form method="POST">

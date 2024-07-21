@@ -19,4 +19,5 @@ urlpatterns = [
 
 
     path('page/<int:id>/', page_details, name='page-details'),
+    path('page/preview/<int:id>/', page_preview, name='page-preview'),
 ]

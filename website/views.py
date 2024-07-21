@@ -233,3 +233,11 @@ def page_details(request, id):
     } 
     return render(request, 'page-details.html', context)
 
+
+def page_preview(request, id): 
+    page = get_object_or_404(WebsitePage, id=id) 
+
+    context = {
+        'page': page, 
+    } 
+    return render(request, 'page-preview.html', context)

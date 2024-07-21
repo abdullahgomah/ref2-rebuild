@@ -7,5 +7,9 @@
 }
 
 body {
-    background: white; 
+    /* background: white;  */
+}
+
+header {
+    display: none !important;
 }
