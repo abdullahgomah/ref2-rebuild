@@ -1,6 +1,7 @@
 .fields__types {
     line-height: 2;
-    width: 300px;
+    /* width: 300px; */
+    width: 100%;
     max-width: 100%;
     margin-top: 1rem;
 }
