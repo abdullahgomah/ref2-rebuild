@@ -19,6 +19,7 @@
             top: 0; 
             right: 0;
             width: 100%;
+            max-width: 100%;
             min-height: 100vh; 
             display: flex;
             align-items: center;
@@ -91,7 +92,11 @@
 
                     </div>
                     <br>
-                    <input type="text" placeholder="اكتب اسم الحقل" class="text-input input" id="field__name">
+                    <input type="text" placeholder="اكتب اسم الحقل بالإنجليزية بدون مسافات" class="text-input input" id="field__name">
+                    <label for="" class="form-text" style="font-size: .8rem; color: #00000090;">
+                        * اكتب اسم الحقل بالإنجليزية بدون مسافات مثال: book_name
+                    </label>
+                    <br>
                     <br>
                     <input type="text" placeholder="وصف الحقل" class="input text-input" id="field__description">
                     <form method="POST" id="add-field-form">
