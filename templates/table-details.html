@@ -10,6 +10,52 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{% static '/css/table-details.css' %}">    
+
+    <style>
+
+
+        .alert { 
+            position: fixed;
+            top: 0; 
+            right: 0;
+            width: 100%;
+            min-height: 100vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #10101030; 
+            display: none;
+        }
+
+        .alert__wrapper { 
+            background: white; 
+            width: 400px; 
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            row-gap: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px #f9f9f950;
+            animation: alertpop .5s 0s ; 
+        }
+
+        .alert__wrapper i {
+            font-size: 3rem;
+            color: #198754;
+        }
+
+        @keyframes alertpop {
+            from {
+                transform: scale(0);
+            } to {
+                transform: scale(1);
+            }
+        }
+
+    </style>
+
 {% endblock stylesheets %}
     
 
@@ -67,15 +113,16 @@
                         </thead>
                         <tbody id="all-fields">
                             {% for field in table.fields.all %}
+                            
                             <tr>
                                 {% comment %} <td>1</td> {% endcomment %}
-                                <td>{{field.name}}</td>
+                                <td class="field_name">{{field.name}}</td>
                                 <td>{{field.description}}</td>
                                 <td>{{field.data_type.display_name}}</td>
                                 <td class="db_field_actions">
                                     <a href="#" class="btn btn-sm btn-solid-dark">تفاصيل</a>
                                     <a href="#" class="btn btn-sm btn-solid-danger">حذف</a>
-                                    <a href="#" class="btn btn-sm btn-outline">نسخ الكود</a>
+                                    <a class="btn btn-sm btn-outline btn-copy-cmd" data-cmd="{{field.data_type.cmd}}">نسخ الكود</a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -89,7 +136,52 @@
 
     </section>
 
+    <div class="alert">
+        
+        <div class="alert__wrapper">
+            <i class="fa-regular fa-circle-check "></i>
+            <p>تم نسخ الكود بنجاح</p>
+            <a class="btn btn-solid-dark btn-close-alert">إغلاق النافذة</a>
+        </div>
+
+    </div>
+
     <script src="{% static 'js/add-field.js' %}"></script>
+
+    <script>
+
+        let showAlert = () => { 
+            let alertElement = document.querySelector('.alert'); 
+            alertElement.style.display= 'flex';
+
+            let btnClose = alertElement.querySelector('.btn-close-alert');
+            btnClose.addEventListener('click', () => {
+                alertElement.style.display = 'none';
+            })
+
+        }
+
+        let btnCopyCmd = document.querySelectorAll('.btn-copy-cmd'); 
+        btnCopyCmd.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                let cmd = btn.parentElement.parentElement.querySelector('.field_name').textContent + " = " + btn.dataset.cmd; 
+                console.log(cmd); 
+
+                let cmdInputElement = document.createElement('input') 
+                cmdInputElement.hidden = true; 
+                cmdInputElement.value = cmd; 
+
+                cmdInputElement.select(); 
+                cmdInputElement.setSelectionRange(0, 99999); 
+
+                navigator.clipboard.writeText(cmdInputElement.value); 
+
+                // show alert with message 
+                showAlert() 
+                
+            })
+        })
+    </script>
 
 
 
