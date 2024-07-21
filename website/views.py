@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages 
 from .models import * 
 from base.models import  *
+from .forms import * 
+
 # Create your views here.
 
 def all_websites(request): 
@@ -213,3 +215,21 @@ def add_field(request):
         )
 
         return ajax_all_fields(request, table_id)
+    
+
+
+def page_details(request, id): 
+    page = get_object_or_404(WebsitePage, id=id) 
+    w_form = WebsitePageForm(instance=page) 
+
+    if request.POST:
+        w_form = WebsitePageForm(request.POST, instance=page) 
+        if w_form.is_valid(): 
+            w_form.save() 
+
+    context = {
+        'page': page, 
+        'form': w_form, 
+    } 
+    return render(request, 'page-details.html', context)
+

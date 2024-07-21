@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بالإشارة | الرئيسية</title>
-   
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{page.name}}
+{% endblock title %}
+    
+
+{% block stylesheets %}
+    
+    
+
     <!-- start highlights js  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/androidstudio.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -20,40 +25,20 @@
 
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/page-details.css">
-</head>
-<body>
+
+    <style>
+        .django-ace-widget {
+            width: 100% !important; 
+        }
+    </style>
+
+{% endblock stylesheets %}
+
+
+
+{% block content %}
     
-
-    <header>
-        <!-- <div class="container"> -->
-            <div class="logo-container">
-                <p class="logo-text">
-                    <a href="">
-                        بالإشارة إلى
-                    </a>
-                </p>
-            </div>
-            <nav >
-                <ul>
-                    <li><a href="#" class="list-item">الرئيسية</a></li>
-                    <li><a href="#" class="list-item">قواعد البيانات</a></li>
-                    <li><a href="#" class="list-item">المواقع</a></li>
-                    <li><a href="#" class="list-item">القوالب الجاهزة</a></li>
-                </ul>
-            </nav>
-            <div class="profile-btns">
-                <a href="">
-                    <img src="./images/user-solid(1).svg" alt="">
-                </a>
-                <a href="#" class="user__name">عبدالله محمد</a>
-            </div>
-
-            <div class="burger-menu">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-        <!-- </div> -->
-    </header>
-
+    
 
     <section class="page-code">
         <div class="container">
@@ -62,46 +47,59 @@
                 <a href="#" class="btn btn-outline">معاينة</a>
             </div>
             <br>
-            <div class="section__content">
-                <!-- here is code editor -->
+            <form method="POST">
 
-                <div class="code-div">
-                    <p>
-                        <i class="fa-brands fa-html5"></i>
-                        HTML
-                    </p>
-                    <textarea name="html-code" id="html-code" onkeyup="run()"></textarea>
+                {% csrf_token %}
+                {{form.media}}
+
+                <div class="section__content">
+                    <!-- here is code editor -->
+
+                    <div class="code-div">
+                        <p>
+                            <i class="fa-brands fa-html5"></i>
+                            HTML
+                        </p>
+                        {{form.html}}
+                        <!-- <textarea name="html-code" id="html-code" onkeyup="run()"></textarea> -->
+                    </div>
+
+                    <div class="code-div">
+                        <p>
+                            <i class="fa-brands fa-css3-alt"></i>
+                            CSS
+                        </p>
+                        <!-- <textarea onkeyup="run()" name="css-code" id="css-code"></textarea> -->
+                         {{form.css}}
+                    </div>
+
+                    <div class="code-div">
+                        <p>
+                            <i class="fa-brands fa-js"></i>
+                            JS
+                        </p>
+                        {{form.js}}
+                        <!-- <textarea name="js-code" id="js-code" onkeyup="run()"></textarea> -->
+                    </div>
+
+                    <!-- <iframe id="output-iframe" name="output-iframe" ></iframe> -->
+
+                    <div class="page-actions">
+                        <!-- <a href="#" class="btn btn-outline">حفظ</a> -->
+                        <button type="submit" class="btn btn-outline">حفظ</button>
+                        <a href="#" class="btn btn-solid-danger">حذف الصفحة</a>
+                    </div>
                 </div>
 
-                <div class="code-div">
-                    <p>
-                        <i class="fa-brands fa-css3-alt"></i>
-                        CSS
-                    </p>
-                    <textarea onkeyup="run()" name="css-code" id="css-code"></textarea>
-                </div>
+            </form>
 
-                <div class="code-div">
-                    <p>
-                        <i class="fa-brands fa-js"></i>
-                        JS
-                    </p>
-                    <textarea name="js-code" id="js-code" onkeyup="run()"></textarea>
-                </div>
-
-                <iframe id="output-iframe" name="output-iframe" ></iframe>
-
-                <div class="page-actions">
-                    <a href="#" class="btn btn-outline">حفظ</a>
-                    <a href="#" class="btn btn-solid-danger">حذف الصفحة</a>
-                </div>
-            </div>
         </div>
     </section>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
     <script>
+        /*
         hljs.highlightAll();
 
         let htmlCode = document.querySelector('#html-code'); 
@@ -133,7 +131,9 @@
               });
         })
 
+        */
+
     </script>
-    <script src="./js/main.js"></script>
-</body>
-</html>
+
+
+{% endblock content %}

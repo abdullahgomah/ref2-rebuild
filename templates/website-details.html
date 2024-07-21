@@ -46,7 +46,7 @@
                         <div class="col page">
                             <h3>{{page.name}}</h3>
 
-                            <a href="#" class="btn btn-outline btn-open-code">افتح الكود</a>
+                            <a href="{% url 'website:page-details' page.id %}" class="btn btn-outline btn-open-code">افتح الكود</a>
                         </div>
 
                         {% endfor %}

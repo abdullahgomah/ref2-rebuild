@@ -1,5 +1,7 @@
 from django.db import models
 from base.models import * 
+from django_ace import AceWidget
+
 
 # Create your models here.
 class Website(models.Model):
