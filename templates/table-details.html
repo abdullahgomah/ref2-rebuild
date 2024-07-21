@@ -166,6 +166,24 @@
 
         }
 
+        function copyText(text) {
+            // Create a temporary text area element
+            var tempTextArea = document.createElement("textarea");
+            tempTextArea.value = text;
+            
+            // Append the text area to the document body (required for selection to work)
+            document.body.appendChild(tempTextArea);
+            
+            // Select the text in the text area
+            tempTextArea.select();
+            
+            // Copy the selected text to the clipboard
+            document.execCommand("copy");
+            
+            // Remove the temporary text area from the document
+            document.body.removeChild(tempTextArea);
+        }
+
         let btnCopyCmd = document.querySelectorAll('.btn-copy-cmd'); 
         btnCopyCmd.forEach((btn) => {
             btn.addEventListener('click', () => {
@@ -176,10 +194,9 @@
                 cmdInputElement.hidden = true; 
                 cmdInputElement.value = cmd; 
 
-                cmdInputElement.select(); 
-                cmdInputElement.setSelectionRange(0, 99999); 
+                copyText(cmd); 
 
-                navigator.clipboard.writeText(cmdInputElement.value); 
+                // navigator.clipboard.writeText(cmdInputElement.value); 
 
                 // show alert with message 
                 showAlert() 
