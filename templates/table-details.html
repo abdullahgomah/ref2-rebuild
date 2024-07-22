@@ -127,7 +127,7 @@
                                 <td class="db_field_actions">
                                     <a href="#" class="btn btn-sm btn-solid-dark">تفاصيل</a>
                                     <a href="#" class="btn btn-sm btn-solid-danger">حذف</a>
-                                    <a class="btn btn-sm btn-outline btn-copy-cmd" data-cmd="{{field.data_type.cmd}}">نسخ الكود</a>
+                                    <a class="btn btn-sm btn-outline btn-copy-cmd" data-cmd="{{field.data_type.cmd}}" onclick="copyCmd(this)">نسخ الكود</a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -151,7 +151,6 @@
 
     </div>
 
-    <script src="{% static 'js/add-field.js' %}"></script>
 
     <script>
 
@@ -183,7 +182,14 @@
             // Remove the temporary text area from the document
             document.body.removeChild(tempTextArea);
         }
+        
+        let copyCmd = (e) => {
+            let cmdText = e.dataset.cmd; 
+            copyText(cmdText); 
+            showAlert(); 
+        }
 
+        /*
         let btnCopyCmd = document.querySelectorAll('.btn-copy-cmd'); 
         btnCopyCmd.forEach((btn) => {
             btn.addEventListener('click', () => {
@@ -203,7 +209,11 @@
                 
             })
         })
+        */ 
     </script>
+
+    <script src="{% static 'js/add-field.js' %}"></script>
+
 
 
 
