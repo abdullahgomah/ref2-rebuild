@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'base',
     'page', 
     'django_ace', 
+    'app_v2',
 ]
 
 MIDDLEWARE = [

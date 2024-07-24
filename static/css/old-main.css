@@ -1,0 +1,92 @@
+* { 
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Cairo", sans-serif;
+
+}
+
+body {
+    background: url('bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height: 100vh;
+    backdrop-filter: blur(3px);
+}
+
+h1, p { 
+    color: white;
+}
+
+.btn {
+    display: inline-block;
+    padding: .3rem 2rem; 
+    margin-top: 1rem;
+    border-radius: 3rem;
+}
+
+input ,select { 
+    width: 300px;
+    max-width: 100%;
+}
+
+input {
+    padding:  .2rem .4rem ;
+    border-radius: 1rem;
+    outline: none; 
+    border: none;
+}
+
+.field { 
+    margin-bottom: 1rem;
+}
+
+.field select {
+    padding:  .2rem .4rem ;
+    border-radius: 1rem;
+}
+
+.btn-solid-dark {
+    background: #121212;
+    color: white; 
+}
+
+.container {
+    margin: 0 auto; 
+}
+
+
+@media (max-width: 575.98px) { 
+    .container {
+        width: 90%;
+    }
+}
+
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    .container {
+        width: 570px;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .container {
+        width: 768px;
+    }
+}
+
+
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .container {
+        width: 992px;
+    }
+}
+
+
+@media (min-width: 1200px) { 
+    .container {
+        width: 1200px;
+    }
+} 
