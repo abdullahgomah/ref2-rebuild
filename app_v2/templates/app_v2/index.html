@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    واجهة زمان
+{% endblock title %}
+    
+
+
+{% block stylesheets %}
+    <style>
+        body {
+            background-image: url("{% static 'images/old-bg.jpg' %}");
+        }
+
+        input { 
+            padding: 8px; 
+            width: 300px;
+            max-width: 100%;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border:none; 
+            outline: none;
+        }
+    </style>
+{% endblock stylesheets %}
+    
+
+{% block content %}
+    
+<section>
+    <div class="container">
+        <div class="section__heading">
+            <h1>إضافة مشروع</h1>
+            <input type="text" placeholder="اكتب اسم المشروع">
+            <button class="btn btn-solid-dark">إضافة</button>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+
+        <div class="section__heading">
+            <h1>جميع المشاريع</h1>
+        </div>
+
+        <div class="section__content">
+
+            
+            <div class="grid ">
+            {% for project in projects %}
+
+                <div class="col">
+                    <h3>{{project}}</h3>
+                    <br>
+                    <p>
+                        {{project.p_type}}
+                    </p>
+                    <a href="#" class="btn btn-solid-dark">تفاصيل المشروع</a>
+                </div>
+                
+                {% endfor %}
+            </div>
+                
+        
+        </div>
+
+    </div>
+</section>
+
+{% endblock content %}
+    

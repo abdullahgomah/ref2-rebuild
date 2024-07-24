@@ -36,6 +36,11 @@
             border-bottom: 1px solid #fff;
         }
 
+
+        section {
+            margin: 1rem 0; 
+        }
+
     </style>
 {% endblock stylesheets %}
     
@@ -49,12 +54,12 @@
         <div class="fields__wrapper">
             <div class="field">
                 <p>اسم الحقل</p>
-                <input type="text" placeholder="اكتب اسم الحقل باللغة الإنجليزية">
+                <input type="text" placeholder="اكتب اسم الحقل باللغة الإنجليزية" name="field__name__input">
             </div>
 
             <div class="field">
                 <p>نوع الحقل</p>
-                <select name="" id="">
+                <select name="field__type__select" id="">
                     <option value="char_field">نص</option>
                     <option value="integer">رقم صحيح</option>
                     <option value="bool">قيمة منطقية</option>
