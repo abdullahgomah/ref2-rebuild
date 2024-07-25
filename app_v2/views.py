@@ -13,6 +13,10 @@ def index(request):
 
     projects = Project.objects.all() 
 
+    if request.POST: 
+        project_name = request.POST.get('project-name-input') 
+        Project.objects.create(name=project_name)
+
     context = {
         'projects': projects,
     }

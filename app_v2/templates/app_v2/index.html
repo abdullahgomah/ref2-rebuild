@@ -33,8 +33,11 @@
     <div class="container">
         <div class="section__heading">
             <h1>إضافة مشروع</h1>
-            <input type="text" placeholder="اكتب اسم المشروع">
-            <button class="btn btn-solid-dark">إضافة</button>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="text" placeholder="اكتب اسم المشروع" name="project-name-input">
+                <button type="submit" class="btn btn-solid-dark">إنشاء صفحة جديدة</button>
+            </form>
         </div>
     </div>
 </section>

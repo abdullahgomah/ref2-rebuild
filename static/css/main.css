@@ -158,6 +158,60 @@ input {
 
 
 
+/* textarea */
+
+textarea {
+    resize: none;
+    height: 100px;
+    border-radius: 15px;
+    padding: .5rem 1rem; 
+    border: 1px solid #12121230;
+}
+
+
+/* select */
+
+select {
+    padding: .5rem 1rem ;
+    border-radius: 15px;
+    border: 1px solid #12121230;
+    outline: none;
+}
+
+
+input.error, textarea.error, select.error {
+    border-color: #dc354560 !important; 
+    color: #dc3545; 
+}
+
+
+
+/* messages */
+
+.messages {
+    margin-bottom: .5rem;
+}
+
+.messages li {
+    list-style: none;
+    padding: 10px;
+}
+
+.messages li.info {
+    background: #2196F3;
+    color: #f9f9f9f9;
+}
+
+.messages li.error { 
+    background: #dc3545; 
+    color: #f9f9f9;
+}
+
+.messages li.success { 
+    background: #20c997; 
+    color: #121212;
+}
+
 /* responsive dim */
 
 
