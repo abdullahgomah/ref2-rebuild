@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    جميع المواقع
+{% endblock title %}
+    
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'css/old-main.css' %}">
+
+    
+<style>
+    body {
+        background-image: url("{% static 'images/old-bg.jpg' %}");
+    }
+    input, select { 
+        padding: 8px; 
+        width: 300px;
+        max-width: 100%;
+        margin: 1rem 0;
+        border-radius: 8px;
+        border:none; 
+        outline: none;
+    }
+
+    .col *{
+        color: white;
+    }
+</style>
+
+{% endblock stylesheets %}
+    
+
+
+{% block content %}
+    
+<section>
+    <div class="container">
+        <h1>إنشاء موقع</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="field">
+                <input type="text" placeholder="اكتب اسم الموقع" required name="website-name-input">
+            </div>
+            <div class="field">
+                <input type="url" name="website-url-input" placeholder="ادخل رابط الموقع" id="" required>
+            </div>
+            <button type="submit" class="btn btn-solid-dark">إضافة موقع</button>
+        </form>
+    </div>
+</section>
+
+<br>
+
+<section>
+    
+    <div class="container">
+        <div class="section__heading">
+            <h1>جميع المواقع</h1>
+        </div>
+
+        <div class="section__content">
+            <div class="grid">
+                
+                {% for website in websites %}
+                    <div class="col">
+                        <H3>
+                            {{website}}
+                        </H3>
+                        <a href="{{website.url}}">
+                            {{website.url}}
+                        </a>
+
+                        <br>
+
+                        <a href="{% url 'v3:website-details' website.id %}" class="btn btn-solid-dark">
+                            تفاصيل الموقع
+                        </a>
+                    </div>
+                {% endfor %}
+                    
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock content %}

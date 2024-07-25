@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    
+{{page.website}} | {{page}}
+{% endblock title %}
+    
+
+
+{% block stylesheets %}
+    
+<link rel="stylesheet" href="{% static 'css/old-main.css' %}">
+    
+<style>
+
+    header {
+        display: none !important;
+    }
+
+    body {
+        background-image: url("{% static 'images/old-bg.jpg' %}");
+    }
+    input, select { 
+        padding: 8px; 
+        width: 300px;
+        max-width: 100%;
+        margin: 1rem 0;
+        border-radius: 8px;
+        border:none; 
+        outline: none;
+    }
+
+    .col *{
+        color: white;
+    }
+
+
+    table { 
+        width: 100%;
+        overflow-x: auto;
+        max-width: 100%; 
+        border-collapse: collapse;
+    }
+
+    table thead tr { 
+        background: #f9f9f9; 
+    }
+
+    table thead th {
+        text-align: right;
+    }
+
+    table th, 
+    table td { 
+        padding: 10px 20px;
+        
+    }
+
+    table tbody tr { 
+        border-bottom: 1px solid #f9f9f950;
+    }
+
+    table tbody tr:nth-child(even) { 
+        background: #f9f9f990;
+    }
+
+    .field_types__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .field_type  {
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .field_type input {
+        width: auto;
+    }
+
+    label {
+        color: white;
+    }
+</style>
+
+{% endblock stylesheets %}
+
+
+
+{% block content %}
+    
+
+<section>
+
+    <div class="container">
+        <div class="section__heading">
+            <h1>
+                {{page}}
+            </h1>
+            <hr>
+
+            <h1>
+                اضافة حقول شاشة
+            </h1>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="field">
+                    <input type="text" placeholder="اكتب اسم الحقل" required name="field-name-input">
+                </div>
+
+                <div class="field">
+                    <p>نوع الحقل*</p>
+
+                    <div class="field_types__wrapper">
+
+                        {% for type in sf_types %}
+                            <div class="field_type">
+                                <label >{{type.display_name}}</label>
+                                <input type="radio" name="sf_type-input" value="{{type.name}}" id="" required>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                        
+                </div>
+
+                <button class="btn btn-solid-dark" type="submit">إنشاء حقل</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<section>
+
+    <div class="container">
+
+        <div class="section__heading">
+            <h1>جميع الحقول</h1>
+        </div>
+
+        <div class="section__content">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>اسم الحقل</th>
+                        <th>نوع الحقل</th>
+                        <th>إجراء</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    
+                    {% for field in page.s_fields.all %}
+                        
+                    <tr>
+                        <td>{{field.name}}</td>
+                        <td>{{field.sf_type.display_name}}</td>
+                        <td style="display: flex; flex-wrap: wrap;">
+                            <a href="#" class="btn btn-solid-dark btn-sm" style="margin-top: 0;" data-cmd="{{field.sf_type.cmd}}">نسخ الكود</a>
+                            <a href="#" class="btn btn-solid-danger btn-sm" style="margin-top: 0;">حذف</a>
+                        </td>
+                    </tr>
+
+
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+    
+</section>
+
+<section>
+    <div class="container">
+
+        <a href="{% url 'v3:export-code' page.id %}" class="btn btn-solid-dark">سحب كود الصفحة</a>
+    </div>
+</section>
+
+
+{% endblock content %}
+    

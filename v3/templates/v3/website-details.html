@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    {{website}}
+{% endblock title %}
+    
+
+
+{% block stylesheets %}
+    
+<link rel="stylesheet" href="{% static 'css/old-main.css' %}">
+    
+<style>
+    body {
+        background-image: url("{% static 'images/old-bg.jpg' %}");
+    }
+    input, select { 
+        padding: 8px; 
+        width: 300px;
+        max-width: 100%;
+        margin: 1rem 0;
+        border-radius: 8px;
+        border:none; 
+        outline: none;
+    }
+
+    .col *{
+        color: white;
+    }
+</style>
+
+{% endblock stylesheets %}
+    
+
+
+{% block content %}
+    
+
+<section>
+    <div class="container">
+        <div class="section__heading">
+            <h1>إضافة صفحة</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="field">
+                    <input type="text" name="page-name-input" required placeholder="اكتب اسم الصفحة">
+                </div>
+
+                <button type="submit" class="btn btn-solid-dark">إنشاء صفحة</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="section__heading">
+            <h1>جميع صفحات الموقع</h1>
+        </div>
+        
+
+        <div class="section__content">
+
+            <div class="grid">
+                
+                {% for page in website.pages.all %}
+                    <div class="col">
+                        <h3>
+                            {{page.name}}
+                        </h3>
+
+                        <a href="{% url 'v3:page-details' page.id %}" class="btn btn-solid-dark">افتح الصفحة</a>
+                    </div>
+                {% endfor %}
+                    
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+    
