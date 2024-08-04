@@ -18,19 +18,25 @@ def index(request):
     if request.POST:
         name = request.POST.get('website-name-input') 
         url= request.POST.get('website-url-input') 
+        description = request.POST.get('description-input') 
+        dbtype = request.POST.get('dbtype-input')
+        dbtype_obj = DbType.objects.get(name=dbtype) 
 
         if name != "" or name != None: 
             Website.objects.create(
                 name = name, 
-                url = url 
+                url = url,
+                description= description,
+                db_type=dbtype_obj
             )
 
 
     websites = Website.objects.all() 
-
+    dbtypes = DbType.objects.all() 
 
     context = {
         'websites': websites,
+        'dbtypes': dbtypes, 
     } 
     return render(request, 'v3/index.html', context)
 
