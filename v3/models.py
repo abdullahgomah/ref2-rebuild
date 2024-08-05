@@ -2,7 +2,7 @@ from django.db import models
 
 class ScreenFieldType(models.Model):
 
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     display_name = models.CharField(max_length=200)
     cmd = models.TextField() 
 

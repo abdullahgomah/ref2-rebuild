@@ -108,6 +108,13 @@
             <h1>
                 اضافة حقول شاشة
             </h1>
+            <form method="post" enctype="multipart/form-data" action="{% url 'v3:upload-from-excel' page.id %}">
+                {% csrf_token %}
+                <label for="file-input">ارفع ملف اكسل</label>
+                <input type="file" name="file-input" id="file-input" accept=".xlsx" required>
+
+                <button type="submit" class="btn btn-solid-dark">رفع ملف اكسل</button>
+            </form>
 
             <form action="" method="post">
                 {% csrf_token %}

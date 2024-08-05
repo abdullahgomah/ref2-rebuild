@@ -19,8 +19,8 @@ h1, p {
 }
 
 .btn {
-    display: inline-block;
-    padding: .3rem 2rem; 
+
+    /* padding: .3rem 2rem;  */
     margin-top: 1rem;
     border-radius: 3rem;
 }
@@ -38,7 +38,7 @@ input {
 }
 
 .field { 
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
 }
 
 .field select {

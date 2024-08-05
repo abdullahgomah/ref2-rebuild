@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import * 
 from urllib.parse import quote
-
+from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 import os 
 from zipfile import ZipFile
+from openpyxl import load_workbook
 
 # Create your views here.
 
@@ -140,3 +141,36 @@ def export_code(request, id):
     os.remove(output_zipfile_name) 
     
     return response
+
+
+def upload_from_execl(request, page_id): 
+    page = get_object_or_404(Page, id=page_id)
+
+    if request.POST: 
+        file = request.FILES['file-input']
+        wb = load_workbook(filename=file) 
+
+        sheet1 = wb['Sheet1']
+
+        for i in range(1000): 
+            cellA = 'A'+ str(i+1) 
+            cellB = 'B'+ str(i+1) 
+            cellA_value = sheet1[cellA].value 
+            cellB_value = sheet1[cellB].value 
+
+            if cellA_value == None or cellB_value == None: 
+                break; 
+            
+
+            sf_type = get_object_or_404(ScreenFieldType, name=cellB_value)
+
+            ScreenField.objects.create(
+                page=page, 
+                sf_type=sf_type, 
+                name = cellA_value
+                
+            )
+
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
