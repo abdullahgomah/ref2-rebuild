@@ -16,10 +16,22 @@ class ScreenFieldType(models.Model):
         verbose_name_plural = 'ScreenFieldTypes'
 
 
+class DbType(models.Model):
+    name = models.CharField(max_length=150, blank=True, null=True, unique=True)
+
+    def __str__(self):
+        return self.name 
+
+    class Meta:
+        verbose_name = 'نوع قاعدة بيانات'
+        verbose_name_plural = 'أنواع قواعد البيانات'
+
 class Website(models.Model):
     name = models.CharField(max_length=200) 
     url = models.URLField(verbose_name="رابط الموقع")
-    
+    db_type = models.ForeignKey(DbType, related_name='websites', on_delete=models.CASCADE, null=True, blank=True)
+    description = models.TextField(null=True, blank=True) 
+
 
     def __str__(self):
         return self.name 

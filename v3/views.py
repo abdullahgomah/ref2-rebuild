@@ -3,6 +3,8 @@ from .models import *
 from urllib.parse import quote
 
 from django.http import HttpResponse
+import os 
+from zipfile import ZipFile
 
 # Create your views here.
 
@@ -16,19 +18,25 @@ def index(request):
     if request.POST:
         name = request.POST.get('website-name-input') 
         url= request.POST.get('website-url-input') 
+        description = request.POST.get('description-input') 
+        dbtype = request.POST.get('dbtype-input')
+        dbtype_obj = DbType.objects.get(name=dbtype) 
 
         if name != "" or name != None: 
             Website.objects.create(
                 name = name, 
-                url = url 
+                url = url,
+                description= description,
+                db_type=dbtype_obj
             )
 
 
     websites = Website.objects.all() 
-
+    dbtypes = DbType.objects.all() 
 
     context = {
         'websites': websites,
+        'dbtypes': dbtypes, 
     } 
     return render(request, 'v3/index.html', context)
 
@@ -85,21 +93,35 @@ def page_details(request, id):
 def export_code(request, id): 
     page = get_object_or_404(Page, id=id)
 
-    filename = f"{page.name}.html"
+    # filename = f"{page.name}.txt"
+    names = [
+        f"{page.name}.txt", 
+        f"{page.name}.html"
+    ]
     
+
+    for filename in names: 
     
-    with open(filename, 'w+', encoding='utf-8') as code: 
-        for field in page.s_fields.all(): 
-            cmd = field.sf_type.cmd 
-            cmd = str(cmd)
+        with open(filename, 'w+', encoding='utf-8') as code: 
+            for field in page.s_fields.all(): 
+                cmd = field.sf_type.cmd 
+                cmd = str(cmd)
 
-            code.write(cmd) 
-            code.write('\n')
+                code.write(cmd) 
+                code.write('\n')
 
-    with open(filename, 'r', encoding='utf-8') as f: 
+
+    
+    output_zipfile_name = f"{page.website.id}output-{page.id}.zip"
+
+    with ZipFile(output_zipfile_name, 'w') as zip_object: 
+        for name in names: 
+            zip_object.write(name)
+
+
+    with open(output_zipfile_name, 'rb') as f: 
         file_content = f.read() 
 
-    
     # response = HttpResponse(file, content_type="text/html")
     # response['Content-Disposition'] = f'attachment; filename="{filename}"'
     
@@ -107,10 +129,14 @@ def export_code(request, id):
 
 
     # URL encode the filename to ensure compatibility
-    encoded_filename = quote(filename)
+    encoded_filename = quote(output_zipfile_name)
 
     # Create the HTTP response to download the file
-    response = HttpResponse(file_content, content_type="text/html")
-    response['Content-Disposition'] = f'attachment; filename*=UTF-8\'\'{encoded_filename}'
+    response = HttpResponse(file_content)
+    response['Content-Type'] = 'application/x-zip-compressed'
+    # response['Content-Disposition'] = f'attachment; filename*=UTF-8\'\'{encoded_filename}'
+    response['Content-Disposition'] = f'attachment; filename={encoded_filename}'
+
+    os.remove(output_zipfile_name) 
     
     return response

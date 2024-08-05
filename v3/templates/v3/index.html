@@ -16,7 +16,7 @@
     body {
         background-image: url("{% static 'images/old-bg.jpg' %}");
     }
-    input, select { 
+    input, select, textarea { 
         padding: 8px; 
         width: 300px;
         max-width: 100%;
@@ -24,6 +24,10 @@
         border-radius: 8px;
         border:none; 
         outline: none;
+    }
+
+    select {
+        height: 40px;
     }
 
     .col *{
@@ -47,6 +51,19 @@
             </div>
             <div class="field">
                 <input type="url" name="website-url-input" placeholder="ادخل رابط الموقع" id="" required>
+            </div>
+            <div class="field">
+                <textarea name="description-input" id="description-input" placeholder="اكتب وصف الموقع"></textarea>
+            </div>
+            <div class="field">
+                <select name="dbtype-input" id="dbtype-input">
+                    
+                    <option value="" disabled selected>اختر نوع قاعدة البيانات</option>
+                    {% for type in dbtypes %}
+                        <option value="{{type}}">{{type}}</option>
+                    {% endfor %}
+                        
+                </select>
             </div>
             <button type="submit" class="btn btn-solid-dark">إضافة موقع</button>
         </form>
@@ -75,6 +92,17 @@
                         </a>
 
                         <br>
+
+                        <br>
+                        
+                        {% if website.db_type %}
+                            
+                        
+                        <p>
+                            نوع قاعدة البيانات:
+                            {{website.db_type}}
+                        </p>
+                        {% endif %}
 
                         <a href="{% url 'v3:website-details' website.id %}" class="btn btn-solid-dark">
                             تفاصيل الموقع
