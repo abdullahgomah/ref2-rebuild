@@ -111,6 +111,12 @@
             <form method="post" enctype="multipart/form-data" action="{% url 'v3:upload-from-excel' page.id %}">
                 {% csrf_token %}
                 <label for="file-input">ارفع ملف اكسل</label>
+                <p>
+                    يمكنك إضافة حقول الشاشة من خلال ملفات الاكسل حيث يمكنك تحميل القالب المعتمد 
+                    لرفع الحقول بالشكل المناسب لقواعد البيانات في نظامنا
+
+                </p>
+                <a href="{% url 'v3:download-template' %}" class="btn btn-solid-dark">تحميل ملف الاكسل المعتمد</a>
                 <input type="file" name="file-input" id="file-input" accept=".xlsx" required>
 
                 <button type="submit" class="btn btn-solid-dark">رفع ملف اكسل</button>
@@ -175,7 +181,7 @@
                         <td>{{field.sf_type.display_name}}</td>
                         <td style="display: flex; flex-wrap: wrap;">
                             <a href="#" class="btn btn-solid-dark btn-sm" style="margin-top: 0;" data-cmd="{{field.sf_type.cmd}}">نسخ الكود</a>
-                            <a href="#" class="btn btn-solid-danger btn-sm" style="margin-top: 0;">حذف</a>
+                            <a href="{% url 'v3:del-screen-field' field.id %}" class="btn btn-solid-danger btn-sm" style="margin-top: 0;">حذف</a>
                         </td>
                     </tr>
 

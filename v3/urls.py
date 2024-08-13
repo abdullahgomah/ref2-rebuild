@@ -8,5 +8,7 @@ urlpatterns = [
     path("<int:id>/", website_details, name="website-details"), 
     path("page/<int:id>/", page_details, name='page-details'),
     path("page/<int:id>/export/", export_code, name='export-code'),
-    path('page/<int:page_id>/upload_from_excel/', upload_from_execl, name='upload-from-excel')
+    path('page/<int:page_id>/upload_from_excel/', upload_from_execl, name='upload-from-excel'),
+    path('del-field/<int:id>/', delete_screen_field, name='del-screen-field'),
+    path("download-template/", download_excel_standard_file, name='download-template'),
 ]

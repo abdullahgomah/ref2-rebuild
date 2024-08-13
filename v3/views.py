@@ -152,7 +152,7 @@ def upload_from_execl(request, page_id):
 
         sheet1 = wb['Sheet1']
 
-        for i in range(1000): 
+        for i in range(1, 1000): 
             cellA = 'A'+ str(i+1) 
             cellB = 'B'+ str(i+1) 
             cellA_value = sheet1[cellA].value 
@@ -174,3 +174,23 @@ def upload_from_execl(request, page_id):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
+
+def delete_screen_field(request, id): 
+    get_object_or_404(ScreenField, id=id).delete() 
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    
+
+def download_excel_standard_file(request): 
+    
+    file = ExcelTemplate.objects.last().file 
+    file_path = file.path 
+    file_name= file.name 
+
+    with open(file_path, 'rb') as f: 
+        file_data = f.read() 
+
+        response = HttpResponse(file_data, content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = f'attachment; filename="template.xlsx"'
+    
+    return response

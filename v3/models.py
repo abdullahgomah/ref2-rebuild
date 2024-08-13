@@ -65,3 +65,12 @@ class ScreenField(models.Model):
 
     def __str__(self): 
         return self.name 
+    
+
+class ExcelTemplate(models.Model):
+
+    file = models.FileField(upload_to='excel/')
+
+    class Meta: 
+        verbose_name = 'قالب اكسل'
+        verbose_name_plural = "قوالب الاكسل"
