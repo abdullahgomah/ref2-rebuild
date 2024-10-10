@@ -1,208 +1,373 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block title %} {{page.website}} |
+{{page}} {% endblock title %} {% block stylesheets %}
 
+<link rel="stylesheet" href="{% static 'css/old-main.css' %}" />
 
-{% block title %}
-    
-{{page.website}} | {{page}}
-{% endblock title %}
-    
-
-
-{% block stylesheets %}
-    
-<link rel="stylesheet" href="{% static 'css/old-main.css' %}">
-    
 <style>
+  header {
+    display: none !important;
+  }
 
-    header {
-        display: none !important;
-    }
+  body {
+    background-image: url("{% static 'images/old-bg.jpg' %}");
+  }
+  input,
+  select {
+    padding: 8px;
+    width: 300px;
+    max-width: 100%;
+    margin: 1rem 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+  }
 
-    body {
-        background-image: url("{% static 'images/old-bg.jpg' %}");
-    }
-    input, select { 
-        padding: 8px; 
-        width: 300px;
-        max-width: 100%;
-        margin: 1rem 0;
-        border-radius: 8px;
-        border:none; 
-        outline: none;
-    }
+  .col * {
+    color: white;
+  }
 
-    .col *{
-        color: white;
-    }
+  table {
+    width: 100%;
+    overflow-x: auto;
+    max-width: 100%;
+    border-collapse: collapse;
+  }
 
+  table thead tr {
+    background: #f9f9f9;
+  }
 
-    table { 
-        width: 100%;
-        overflow-x: auto;
-        max-width: 100%; 
-        border-collapse: collapse;
-    }
+  table thead th {
+    text-align: right;
+  }
 
-    table thead tr { 
-        background: #f9f9f9; 
-    }
+  table th,
+  table td {
+    padding: 10px 20px;
+  }
 
-    table thead th {
-        text-align: right;
-    }
+  table tbody tr {
+    border-bottom: 1px solid #f9f9f950;
+  }
 
-    table th, 
-    table td { 
-        padding: 10px 20px;
-        
-    }
+  table tbody tr:nth-child(even) {
+    background: #f9f9f990;
+  }
 
-    table tbody tr { 
-        border-bottom: 1px solid #f9f9f950;
-    }
+  .field_types__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
 
-    table tbody tr:nth-child(even) { 
-        background: #f9f9f990;
-    }
+  .field_type {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
 
-    .field_types__wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-    }
+  .field_type input {
+    width: auto;
+  }
 
-    .field_type  {
-        flex: 1;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .field_type input {
-        width: auto;
-    }
-
-    label {
-        color: white;
-    }
+  label {
+    color: white;
+  }
 </style>
 
-{% endblock stylesheets %}
-
-
-
-{% block content %}
-    
+{% endblock stylesheets %} {% block content %}
 
 <section>
+  <div class="container">
+    <div class="section__heading">
+      <h1>{{page}}</h1>
+      <hr />
 
-    <div class="container">
-        <div class="section__heading">
-            <h1>
-                {{page}}
-            </h1>
-            <hr>
+      <h1>اضافة حقول شاشة</h1>
+      <form
+        method="post"
+        enctype="multipart/form-data"
+        action="{% url 'v3:upload-from-excel' page.id %}"
+      >
+        {% csrf_token %}
+        <label for="file-input">ارفع ملف اكسل</label>
+        <p>
+          يمكنك إضافة حقول الشاشة من خلال ملفات الاكسل حيث يمكنك تحميل القالب
+          المعتمد لرفع الحقول بالشكل المناسب لقواعد البيانات في نظامنا
+        </p>
+        <a href="{% url 'v3:download-template' %}" class="btn btn-solid-dark"
+          >تحميل ملف الاكسل المعتمد</a
+        >
+        <input
+          type="file"
+          name="file-input"
+          id="file-input"
+          accept=".xlsx"
+          required
+        />
 
-            <h1>
-                اضافة حقول شاشة
-            </h1>
-            <form method="post" enctype="multipart/form-data" action="{% url 'v3:upload-from-excel' page.id %}">
-                {% csrf_token %}
-                <label for="file-input">ارفع ملف اكسل</label>
-                <p>
-                    يمكنك إضافة حقول الشاشة من خلال ملفات الاكسل حيث يمكنك تحميل القالب المعتمد 
-                    لرفع الحقول بالشكل المناسب لقواعد البيانات في نظامنا
+        <button type="submit" class="btn btn-solid-dark">رفع ملف اكسل</button>
+      </form>
 
-                </p>
-                <a href="{% url 'v3:download-template' %}" class="btn btn-solid-dark">تحميل ملف الاكسل المعتمد</a>
-                <input type="file" name="file-input" id="file-input" accept=".xlsx" required>
-
-                <button type="submit" class="btn btn-solid-dark">رفع ملف اكسل</button>
-            </form>
-
-            <form action="" method="post">
-                {% csrf_token %}
-                <div class="field">
-                    <input type="text" placeholder="اكتب اسم الحقل" required name="field-name-input">
-                </div>
-
-                <div class="field">
-                    <p>نوع الحقل*</p>
-
-                    <div class="field_types__wrapper">
-
-                        {% for type in sf_types %}
-                            <div class="field_type">
-                                <label >{{type.display_name}}</label>
-                                <input type="radio" name="sf_type-input" value="{{type.name}}" id="" required>
-                            </div>
-                        {% endfor %}
-
-                    </div>
-
-                        
-                </div>
-
-                <button class="btn btn-solid-dark" type="submit">إنشاء حقل</button>
-            </form>
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="field">
+          <input
+            type="text"
+            placeholder="اكتب اسم الحقل"
+            required
+            name="field-name-input"
+          />
         </div>
+
+        <div class="field">
+          <p>نوع الحقل*</p>
+
+          <div class="field_types__wrapper">
+            {% for type in sf_types %}
+            <div class="field_type">
+              <label>{{type.display_name}}</label>
+              <input
+                type="radio"
+                name="sf_type-input"
+                value="{{type.name}}"
+                id=""
+                required
+              />
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <button class="btn btn-solid-dark" type="submit">إنشاء حقل</button>
+      </form>
     </div>
-</section>
-
-
-<section>
-
-    <div class="container">
-
-        <div class="section__heading">
-            <h1>جميع الحقول</h1>
-        </div>
-
-        <div class="section__content">
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>اسم الحقل</th>
-                        <th>نوع الحقل</th>
-                        <th>إجراء</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    
-                    {% for field in page.s_fields.all %}
-                        
-                    <tr>
-                        <td>{{field.name}}</td>
-                        <td>{{field.sf_type.display_name}}</td>
-                        <td style="display: flex; flex-wrap: wrap;">
-                            <a href="#" class="btn btn-solid-dark btn-sm" style="margin-top: 0;" data-cmd="{{field.sf_type.cmd}}">نسخ الكود</a>
-                            <a href="{% url 'v3:del-screen-field' field.id %}" class="btn btn-solid-danger btn-sm" style="margin-top: 0;">حذف</a>
-                        </td>
-                    </tr>
-
-
-                    {% endfor %}
-                </tbody>
-            </table>
-
-        </div>
-
-    </div>
-    
+  </div>
 </section>
 
 <section>
-    <div class="container">
-
-        <a href="{% url 'v3:export-code' page.id %}" class="btn btn-solid-dark">سحب كود الصفحة</a>
+  <div class="container">
+    <div class="section__heading">
+      <h1>جميع الحقول</h1>
     </div>
+
+    <div class="section__content">
+      <table>
+        <thead>
+          <tr>
+            <th>اسم الحقل</th>
+            <th>نوع الحقل</th>
+            <th>إجراء</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for field in page.s_fields.all %}
+
+          <tr>
+            <td>{{field.name}}</td>
+            <td>{{field.sf_type.display_name}}</td>
+            <td style="display: flex; flex-wrap: wrap">
+              <a
+                class="btn btn-solid-dark btn-sm"
+                style="margin-top: 0"
+                data-cmd="{{field.sf_type.cmd}}"
+                >نسخ الكود</a
+              >
+              <a
+                href="{% url 'v3:del-screen-field' field.id %}"
+                class="btn btn-solid-danger btn-sm"
+                style="margin-top: 0"
+                >حذف</a
+              >
+              <a data-id="{{field.id}}" class="btn btn-solid-dark btn-edit-field" style="margin-top: 0"
+                >تعديل</a
+              >
+            </td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section>
 
+<section>
+  <div class="container">
+    <a href="{% url 'v3:export-code' page.id %}" class="btn btn-solid-dark"
+      >سحب كود الصفحة</a
+    >
+  </div>
+</section>
+
+<br>
+
+{% comment %} popup layer {% endcomment %}
+<section class="popup_wrapper">
+  <div class="container">
+    <div class="popup">
+      <a id="btn-close-popup">x</a>
+
+      <form action="" method="POST">
+        <div class="form_field">
+          <label for="" class="form-label">اسم الحقل</label>
+          <input
+            type="text"
+            class="input"
+            placeholder="اكتب اسم الحقل"
+            name="filed__name__input"
+          />
+        </div>
+
+        <div class="form_field">
+          <label for="" class="form-label">نوع الحقل</label>
+          <select name="sf_type__input" id="">
+            <option value="" disabled>اختر نوع الحقل</option>
+            {% for sf_type in sf_types %}
+            <option value="{{sf_type}}">{{sf_type.display_name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        {% comment %} الطول {% endcomment %}
+        <div class="form_field">
+          <label for="" class="form-label">الطول</label>
+          <input
+            type="text"
+            class="input"
+            placeholder="ادخل طول الحقل بالبكسل"
+            name="field__height__input"
+          />
+        </div>
+
+        {% comment %} العرض {% endcomment %}
+        <div class="form_field">
+          <label for="" class="form-label">العرض</label>
+          <input
+            type="text"
+            class="input"
+            placeholder="ادخل عرض الحقل بالبكسل"
+            name="field__width__input"
+          />
+        </div>
+
+        {% comment %} لون النص {% endcomment %}
+        <div class="form_field">
+          <label for="" class="form-label">اختر لون النص</label>
+          {% comment %}
+          <input
+            type="text"
+            class="input"
+            placeholder="ادخل عرض الحقل بالبكسل"
+            name="field__width__input"
+          />
+          {% endcomment %}
+          <input type="color" name="color__input" id="" />
+        </div>
+
+        {% comment %} لون الخلفية {% endcomment %}
+        <div class="form_field">
+          <label for="" class="form-label">اختر لون الخلفية</label>
+          <input type="color" name="bgcolor__input" id="" />
+        </div>
+
+        {% comment %} الهوامش الداخلية {% endcomment %}
+        <div class="form_field">
+          <label for="" class="form-label">الهوامش الداخلية</label>
+          <input
+            type="text"
+            class="input"
+            placeholder="اكتب قيمة الهوامش الداخلية بالبكسل"
+            name="field_padding_input"
+          />
+        </div>
+
+        {% comment %} الهوامش الخارجية {% endcomment %}
+        <div class="form_field">
+          <label for="" class="form-label">الهوامش الخارجية</label>
+          <input
+            type="text"
+            class="input"
+            placeholder="اكتب قيمة الهوامش الخارجية بالبكسل"
+            name="field_margin_input"
+          />
+        </div>
+
+        {% comment %} حجم الخط {% endcomment %}
+        <div class="form_field">
+          <label for="" class="form-label">حجم الخط</label>
+          <input
+            type="text"
+            class="input"
+            placeholder="أدخل حجم الخط بالبكسل"
+            name="font_size__input"
+          />
+        </div>
+
+        {% comment %} عائلة الخط {% endcomment %}
+        <div class="form_field">
+          <label for="" class="form-label">عائلة الخط</label>
+          <input
+            type="text"
+            class="input"
+            placeholder="أدخل عائلة الخط (اسم الخط)"
+            name="font_family__input"
+          />
+        </div>
+
+        {% comment %} وزن الخط {% endcomment %}
+        <div class="form_field">
+          <label for="" class="form-label">وزن الخط</label>
+          <input
+            type="text"
+            class="input"
+            placeholder="أدخل وزن الخط من ١٠٠ إلى ٩٠٠"
+            name="font_weight__input"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-solid-dark">حفظ التعديلات</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+
+  let popupWrapper = document.querySelector('.popup_wrapper')
+
+  let btnClosePopup = document.querySelector("#btn-close-popup");
+  btnClosePopup.addEventListener("click", () => {
+    popupWrapper.style.display = "none";
+  });
+
+  // get edit buttons from the table
+  let editButtons = document.querySelectorAll(".btn-edit-field");
+  editButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // ajax request 
+      $.ajax({
+        url: "/v3/get-field-info/", 
+        type: "GET", 
+        data: {
+          id: btn.dataset.id 
+        }, 
+        success: (res) => {
+          $(".popup_wrapper .container").html(res)
+          let btnClosePopup = document.querySelector("#btn-close-popup");
+          btnClosePopup.addEventListener("click", () => {
+            popupWrapper.style.display = "none";
+          });
+        }, error: (requestobj, err, err_thrown) => {
+
+        }
+      })
+      popupWrapper.style.display = 'block'
+    });
+  });
+</script>
 
 {% endblock content %}
-    

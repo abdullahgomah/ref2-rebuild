@@ -22,3 +22,6 @@ admin.site.register(ScreenField)
 admin.site.register(DbType)
 
 admin.site.register(ExcelTemplate)
+
+
+admin.site.register(PreBuiltField)

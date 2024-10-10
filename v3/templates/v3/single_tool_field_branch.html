@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    {{tool}}
+
+{% endblock title %}
+
+{% block content %}
+
+<style>
+
+    .item {
+        {% comment %} background: red; {% endcomment %}
+        padding: 1rem;
+        border-radius: 1rem;
+        border: 1px solid #121212;
+    }
+
+    .section__content {
+        margin-top: 1rem;
+    }
+
+</style>
+
+<section>
+
+    <div class="container">
+        <div>
+
+            <h1>{{tool}}</h1>
+            {% if tool.description %}
+                <p>{{tool.description}}</p>
+            {% endif %}
+
+        </div>
+
+        <div class="section__content">
+            <div class="grid">
+
+                {% for field in fields %}
+                
+                    <div class="item">
+                        <h4>{{field}}</h4>
+                        {% if field.project %}
+                            <p>
+                                اسم المشروع: <span>{{field.project}}</span>
+                            </p>
+                        {% endif %}
+                        
+                        <br>
+
+                        {% if field.details %}
+                            <h5>تفاصيل: </h5>
+                            <p>
+                                {{field.details}}
+                            </p>
+                        {% endif %}
+
+                        <a href="#" data-cmd = "{{field.cmd}}" class="btn btn-solid-dark btn-copy-cmd">نسخ سطر الكود</a>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+
+
+    let copy_btns = document.querySelectorAll('.btn-copy-cmd')
+
+    copy_btns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault(); 
+
+            let cmd = btn.dataset.cmd; 
+            let inp = document.createElement('input')
+            document.body.append(inp)  
+            inp.value = cmd; 
+            inp.select(); 
+            document.execCommand('copy', false) 
+            inp.remove(); 
+
+
+
+        })
+    })
+
+
+</script>
+
+{% endblock content %}

@@ -7,6 +7,8 @@ import os
 from zipfile import ZipFile
 from openpyxl import load_workbook
 
+from base.models import Tool 
+
 # Create your views here.
 
 def index(request):
@@ -104,12 +106,70 @@ def export_code(request, id):
     for filename in names: 
     
         with open(filename, 'w+', encoding='utf-8') as code: 
+            ## generate css code 
+            code.write('<!DOCTYPE html>\n')
+            code.write('<html dir="rtl" lang="ar" >\n')
+            code.write('<head>\n')
+            code.write(f'<title>{page.name}</title>\n')
+            code.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">')
+            code.write('<style>\n') 
+
             for field in page.s_fields.all(): 
-                cmd = field.sf_type.cmd 
+                code.write(f'#id{field.id} {{\n')
+                code.write(f"\theight: {field.height};\n")
+                code.write(f'\tcolor: {field.color};\n')
+                
+
+                code.write(f"\tfont-size: {field.font_size}px; \n")
+                code.write(f'}}\n')
+            # height
+            # width 
+            # color 
+            # bgcolor 
+            # bgurl 
+            # padding
+            # margin 
+            # fontsize
+            # fontweight 
+            # fontfamily 
+
+            code.write('</style>\n' )
+            code.write('</head>\n')
+
+            code.write('<body>\n')
+
+            code.writelines("""
+            <!--
+            يوجد بعض النصائح الخاصة بعدة عناصر اكتبها لك هنا لتساعدك أثناء تخصيص صفحتك
+            الأزار: الكلاس الافتراضي الموجود في الأزرار هو btn-primary
+
+            يمكنك تغييره لعدة قيم أخرى حسب رغبتك 
+            زر خطر: btn-danger 
+            زر تحذير: btn-warning
+            زر غامق: btn-dark 
+            زر معلومات: btn-info 
+            زر نجاح العملية: btn-success                 
+            -->
+            """)
+
+            for field in page.s_fields.all(): 
+                cmd = field.cmd 
                 cmd = str(cmd)
 
-                code.write(cmd) 
+                code.write("\t" + cmd) 
                 code.write('\n')
+            
+            code.write('</body>\n')
+            
+            code.write('<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>')
+            
+            code.write("\n")
+            
+            code.write('<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>')
+            
+            code.write('\n')
+
+            code.write('</html>')
 
 
     
@@ -194,3 +254,79 @@ def download_excel_standard_file(request):
         response['Content-Disposition'] = f'attachment; filename="template.xlsx"'
     
     return response
+
+
+def get_field_info(request): 
+    if request.GET: 
+        id = request.GET.get('id') 
+
+        field = get_object_or_404(ScreenField, id=id) 
+
+        sf_types = ScreenFieldType.objects.all() 
+
+        context = {
+            'field': field,
+            'sf_types': sf_types, 
+        }
+        return render(request, 'v3/overlay-edit-screenfield.html', context)
+    
+    elif request.POST: 
+        field_id__input = request.POST.get('field__ID') 
+        field = get_object_or_404(ScreenField, id=field_id__input)
+
+        field_name__input = request.POST.get('filed__name__input')
+        
+        field_type__input = request.POST.get('sf_type__input')
+        field_type = get_object_or_404(ScreenFieldType, name=field_type__input)
+
+        field_height_input = request.POST.get('field__height__input') 
+        field_width_input = request.POST.get('field__width__input') 
+
+        color_input = request.POST.get('color__input') 
+        bgcolor_input = request.POST.get('bgcolor__input') 
+
+        field_padding__input = request.POST.get('field_padding_input')
+
+        field_margin__input = request.POST.get('field_margin_input') 
+
+        field_fontsize__input = request.POST.get('font_size__input') 
+        field_fontfamily__input = request.POST.get('font_family__input') 
+        field_fontweight__input = request.POST.get('font_weight__input') 
+
+        field.name = field_name__input 
+        field.sf_type =field_type 
+        field.height = field_height_input 
+        field.width = field_width_input 
+        field.color = color_input 
+        field.bg_color = bgcolor_input 
+        field.padding = field_padding__input 
+        field.margin = field_margin__input 
+        field.font_size = field_fontsize__input
+        field.font_family = field_fontfamily__input 
+        field.font_weight = field_fontweight__input
+
+        field.save() 
+
+        return redirect("v3:page-details", id=field.page.id)
+
+
+def fields_branch_interface(request): 
+
+    tools = Tool.objects.all() 
+
+
+    context = {
+        'tools': tools, 
+    } 
+    return render(request, 'v3/fields-branch-interface.html', context)
+
+
+def single_tool_field_branch(request, id): 
+    tool = get_object_or_404(Tool, id=id) 
+
+    context = {
+        'tool': tool,
+        'fields': tool.fields.all() 
+    }
+
+    return render(request, 'v3/single_tool_field_branch.html', context)

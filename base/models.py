@@ -5,8 +5,7 @@ from django.db import models
 
 class Tool(models.Model):
     name = models.CharField(max_length=250, verbose_name="اسم اللغة / إطار العمل")
-
-
+    description = models.TextField(verbose_name="نبذه وتفاصيل عن التقنية", null=True, blank=True)
     def __str__(self):
         return self.name 
 

@@ -1,0 +1,138 @@
+<div class="popup">
+    <a id="btn-close-popup">x</a>
+
+    <form action="{% url 'v3:get-field-info' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="field__ID" value="{{field.id}}">
+      <div class="form_field">
+        <label for="" class="form-label">اسم الحقل</label>
+        <input
+          type="text"
+          class="input"
+          placeholder="اكتب اسم الحقل"
+          name="filed__name__input"
+          value = "{{field.name}}"
+        />
+      </div>
+
+      <div class="form_field">
+        <label for="" class="form-label">نوع الحقل</label>
+        <select name="sf_type__input" id="">
+          {% comment %} <option value="" disabled>اختر نوع الحقل</option> {% endcomment %}
+          <option value="{{field.sf_type.name}}">{{field.sf_type.display_name}}</option>
+          {% for sf_type in sf_types %}
+          <option value="{{sf_type}}">{{sf_type.display_name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      {% comment %} الطول {% endcomment %}
+      <div class="form_field">
+        <label for="" class="form-label">الطول</label>
+        <input
+          type="text"
+          class="input"
+          placeholder="ادخل طول الحقل بالبكسل"
+          name="field__height__input"
+          value="{{field.height}}"
+        />
+      </div>
+
+      {% comment %} العرض {% endcomment %}
+      <div class="form_field">
+        <label for="" class="form-label">العرض</label>
+        <input
+          type="text"
+          class="input"
+          placeholder="ادخل عرض الحقل بالبكسل"
+          name="field__width__input"
+          value="{{field.width}}"
+        />
+      </div>
+
+      {% comment %} لون النص {% endcomment %}
+      <div class="form_field">
+        <label for="" class="form-label">اختر لون النص</label>
+        {% comment %}
+        <input
+          type="text"
+          class="input"
+          placeholder="ادخل عرض الحقل بالبكسل"
+          name="field__width__input"
+        />
+        {% endcomment %}
+        <input type="color" name="color__input" id="" value="{field.color}" />
+      </div>
+
+      {% comment %} لون الخلفية {% endcomment %}
+      <div class="form_field">
+        <label for="" class="form-label">اختر لون الخلفية</label>
+        <input type="color" name="bgcolor__input" id="" value="{{field.bg_color}}" />
+      </div>
+
+      {% comment %} الهوامش الداخلية {% endcomment %}
+      <div class="form_field">
+        <label for="" class="form-label">الهوامش الداخلية</label>
+        <input
+          type="text"
+          class="input"
+          placeholder="اكتب قيمة الهوامش الداخلية بالبكسل"
+          name="field_padding_input"
+          value="{{field.padding}}"
+        />
+      </div>
+
+      {% comment %} الهوامش الخارجية {% endcomment %}
+      <div class="form_field">
+        <label for="" class="form-label">الهوامش الخارجية</label>
+        <input
+          type="text"
+          class="input"
+          placeholder="اكتب قيمة الهوامش الخارجية بالبكسل"
+          name="field_margin_input"
+          value="{{field.margin}}"
+        />
+      </div>
+
+      {% comment %} حجم الخط {% endcomment %}
+      <div class="form_field">
+        <label for="" class="form-label">حجم الخط</label>
+        <input
+          type="text"
+          class="input"
+          placeholder="أدخل حجم الخط بالبكسل"
+          name="font_size__input"
+          value="{{field.font_size}}"
+        />
+      </div>
+
+      {% comment %} عائلة الخط {% endcomment %}
+      <div class="form_field">
+        <label for="" class="form-label">عائلة الخط</label>
+        <input
+          type="text"
+          class="input"
+          placeholder="أدخل عائلة الخط (اسم الخط)"
+          name="font_family__input"
+          value="{{field.font_family}}"
+        />
+      </div>
+
+      {% comment %} وزن الخط {% endcomment %}
+      <div class="form_field">
+        <label for="" class="form-label">وزن الخط</label>
+        <input
+          type="text"
+          class="input"
+          placeholder="أدخل وزن الخط من ١٠٠ إلى ٩٠٠"
+          name="font_weight__input"
+          value="{{field.font_weight}}"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-solid-dark">حفظ التعديلات</button>
+    </form>
+  </div>
+
+
+

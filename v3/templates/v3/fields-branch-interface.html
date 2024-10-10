@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+مستودع الحقول | اختر التقنية
+{% endblock title %}
+
+{% block content %}
+
+<style>
+
+    .item {
+        {% comment %} background: red; {% endcomment %}
+        padding: 1rem;
+        border-radius: 1rem;
+        border: 1px solid #121212;
+    }
+
+    .section__content {
+        margin-top: 1rem;
+    }
+
+</style>
+
+<section>
+    <div class="container">
+        <div>
+            <h1>مستودع الحقول</h1>
+            <p>الميثاق الأول للحقول في مختلف تقنيات المبرمج، الهدف منه تسريع الإنتاج البرمجي وتسهيل بناء قواعد البيانات على المبرمج</p>
+        </div>
+        <div class="section__content">
+            <div class="grid">
+
+                {% for tool in tools %}
+
+                <div class="item">
+                    <h4>{{tool}}</h4>
+                    <p>
+                        {% if tool.description %}
+                            {{tool.description}}
+                        {% endif %}
+                    </p>
+                    <p>عدد الحقول: <span>{{tool.fields.count}}</span>حقل</p>
+                    <a href="{% url 'v3:single_tool_field_branch' tool.id %}" class="btn btn-solid-dark">تفاصيل</a>
+                </div>
+
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}
